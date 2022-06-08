@@ -1,0 +1,343 @@
+<template>
+    <div class="homepage">
+        <el-container>
+            <Top></Top>
+            <!-- <el-header>
+                <Top></Top>
+            </el-header> -->
+            <el-main style="width: 100% font-size: 14px; padding: 20px 0;">
+                <div style="background: #ffffff; width: 80%; margin: 0 auto; ">
+                    <div style="display: flex; border-radius: 6px;">
+                        <div style="display: flex; flex: 1">
+                            <div class="title-top">物品1</div>
+                            <div class="title-top">物品2</div>
+                            <div class="title-top">物品3</div>
+                            <div class="title-top">物品4</div>
+                            <div class="title-top">物品5</div>
+                            <div class="title-top">物品6</div>
+                            <div class="title-top">物品7</div>
+                            <div class="title-top">物品8</div>
+                        </div>
+                        <div style="line-height: 50px;">
+                            <el-input placeholder="请输入内容" v-model="search">
+                                <el-button slot="append" icon="el-icon-search"></el-button>
+                            </el-input>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; margin-top: 20px;">
+                        <div style="width: 240px; background-color: #5686BF;">
+                            <div class="item">
+                                <div class="item-middle">手机</div>
+                                <div class="item-nav"> ＞ </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-middle">图书音像</div>
+                                <div class="item-nav"> ＞ </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-middle">服饰衣物</div>
+                                <div class="item-nav"> ＞ </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-middle">食品饮料</div>
+                                <div class="item-nav"> ＞ </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-middle">个护化妆</div>
+                                <div class="item-nav"> ＞ </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-middle">玩具乐器</div>
+                                <div class="item-nav"> ＞ </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-middle">生活用品</div>
+                                <div class="item-nav"> ＞ </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-middle">文具用品</div>
+                                <div class="item-nav"> ＞ </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-middle">笔记本 平板</div>
+                                <div class="item-nav"> ＞ </div>
+                            </div>
+                            <div class="item">
+                                <div class="item-middle">其它配件</div>
+                                <div class="item-nav"> ＞ </div>
+                            </div>
+                        </div>
+
+                        <div style="flex: 1;">
+                            <el-carousel style="height: 100%">
+                                <el-carousel-item v-for="url in imgs" :key="url">
+                                    <el-image
+                                        style="width: 100%; height: 100%;"
+                                        :src="url"
+                                        :fit="fit">
+                                    </el-image>
+                                </el-carousel-item>
+                            </el-carousel>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background-color: #eeeeee; width: 80%; margin: 0 auto;">
+                    <div style="height: 50px; line-height: 50px; margin-top: 50px; font-size: 25px; color: gray; float:">
+                        什么东西
+                    </div>
+                    <div style="display: flex; height: 400px; margin-top: 20px;">
+                        <div class="product" style="width: calc(20% -16px); border-top: 1px solid #5E86C1; background-color: #fafafa;">
+                            <div style="text-align: center; height: 7%">
+                                <span style="background-color: #5E86C1; color: #FFFFFF; padding: 0 20px;">商品</span>
+                            </div>
+                            <div style="height: 250px; display: flex; text-align: center;">
+                                <img src="../assets/img/product1.png" style="width: 100%" />
+                            </div>
+                            <div style="text-align: center; text-overflow: ellipsis; line-height: 25px;">
+                                荣耀70 5G系列 8GB+256GB
+                            </div>
+                            <div style="text-align: center; text-overflow: ellipsis; line-height: 25px; color: gray;">
+                                IMX800三主摄 | 旗舰芯片 | 100W超级快充
+                            </div>
+                            <div style="text-align: center; line-height: 40px;">
+                                <span style="color: red;">2699元</span>
+                                <span style="color: gray; text-decoration: line-through;">2999元</span>
+                            </div>
+                        </div>
+                        <div class="product" style="width: calc(20% -16px); border-top: 1px solid #5E86C1; background-color: #fafafa; margin-left: 20px;">
+                            <div style="text-align: center; height: 7%">
+                                <span style="background-color: #5E86C1; color: #FFFFFF; padding:0 20px;">商品</span>
+                            </div>
+                            <div style="height: 250px; display: flex; text-align: center;">
+                                <img src="../assets/img/product1.png" style="width: 100%" />
+                            </div>
+                            <div style="text-align: center; text-overflow: ellipsis; line-height: 25px;">
+                                荣耀70 5G系列 8GB+256GB
+                            </div>
+                            <div style="text-align: center; text-overflow: ellipsis; line-height: 25px; color: gray;">
+                                IMX800三主摄 | 旗舰芯片 | 100W超级快充
+                            </div>
+                            <div style="text-align: center; line-height: 40px;">
+                                <span style="color: red;">2699元</span>
+                                <span style="color: gray; text-decoration: line-through;">2999元</span>
+                            </div>
+                        </div>
+                        <div class="product" style="width: calc(20% -16px); border-top: 1px solid #5E86C1; background-color: #fafafa; margin-left: 20px;">
+                            <div style="text-align: center; height: 7%">
+                                <span style="background-color: #5E86C1; color: #FFFFFF; padding:0 20px;">商品</span>
+                            </div>
+                            <div style="height: 250px; display: flex; text-align: center;">
+                                <img src="../assets/img/product1.png" style="width: 100%" />
+                            </div>
+                            <div style="text-align: center; text-overflow: ellipsis; line-height: 25px;">
+                                荣耀70 5G系列 8GB+256GB
+                            </div>
+                            <div style="text-align: center; text-overflow: ellipsis; line-height: 25px; color: gray;">
+                                IMX800三主摄 | 旗舰芯片 | 100W超级快充
+                            </div>
+                            <div style="text-align: center; line-height: 40px;">
+                                <span style="color: red;">2699元</span>
+                                <span style="color: gray; text-decoration: line-through;">2999元</span>
+                            </div>
+                        </div>
+                        <div class="product" style="width: calc(20% -16px); border-top: 1px solid #5E86C1; background-color: #fafafa; margin-left: 20px;">
+                            <div style="text-align: center; height: 7%">
+                                <span style="background-color: #5E86C1; color: #FFFFFF; padding:0 20px;">商品</span>
+                            </div>
+                            <div style="height: 250px; display: flex; text-align: center;">
+                                <img src="../assets/img/product1.png" style="width: 100%" />
+                            </div>
+                            <div style="text-align: center; text-overflow: ellipsis; line-height: 25px;">
+                                荣耀70 5G系列 8GB+256GB
+                            </div>
+                            <div style="text-align: center; text-overflow: ellipsis; line-height: 25px; color: gray;">
+                                IMX800三主摄 | 旗舰芯片 | 100W超级快充
+                            </div>
+                            <div style="text-align: center; line-height: 40px;">
+                                <span style="color: red;">2699元</span>
+                                <span style="color: gray; text-decoration: line-through;">2999元</span>
+                            </div>
+                        </div>
+                        <div class="product" style="width: calc(20% -16px); border-top: 1px solid #5E86C1; background-color: #fafafa; margin-left: 20px;">
+                            <div style="text-align: center; height: 7%">
+                                <span style="background-color: #5E86C1; color: #FFFFFF; padding:0 20px;">商品</span>
+                            </div>
+                            <div style="height: 250px; display: flex; text-align: center;">
+                                <img src="../assets/img/product1.png" style="width: 100%" />
+                            </div>
+                            <div style="text-align: center; text-overflow: ellipsis; line-height: 25px;">
+                                荣耀70 5G系列 8GB+256GB
+                            </div>
+                            <div style="text-align: center; text-overflow: ellipsis; line-height: 25px; color: gray;">
+                                IMX800三主摄 | 旗舰芯片 | 100W超级快充
+                            </div>
+                            <div style="text-align: center; line-height: 40px;">
+                                <span style="color: red;">2699元</span>
+                                <span style="color: gray; text-decoration: line-through;">2999元</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="height: 50px; line-height: 50px; margin-top: 50px; color:gray; display: flex;">
+                        <div style="font-size: 25px;">手机</div>
+                        <div style="flex: 1; text-align: right;" class="more">查看全部</div>
+                    </div>
+                    <div style="display: flex;">
+                        <div style="width: calc(20% - 16px);">
+                            <img src="../assets/img/upro.png" style="width: 100%; height: 725px;" />
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="height: 350px; display: flex;">
+                                <div v-for="i in 4" :key="i.id" class="product" style="width: calc(25% - 16px); border-top: 1px solid #5E86C1; background-color: #fafafa; margin-left: 20px;">
+                                    <div style="text-align: center; height: 10%">
+                                        <span style="background-color: #5E86C1; color: #FFFFFF; padding:0 20px;">商品</span>
+                                    </div>
+                                    <div style="height: 200px; display: flex; text-align: center;">
+                                        <img src="../assets/img/product1.png" style="width: 100%" />
+                                    </div>
+                                    <div style="text-align: center; text-overflow: ellipsis; line-height: 25px;">
+                                        荣耀70 5G系列 8GB+256GB
+                                    </div>
+                                    <div style="text-align: center; text-overflow: ellipsis; line-height: 25px; color: gray;">
+                                        IMX800三主摄 | 旗舰芯片 | 100W超级快充
+                                    </div>
+                                    <div style="text-align: center; line-height: 40px;">
+                                        <span style="color: red;">2699元</span>
+                                        <span style="color: gray; text-decoration: line-through;">2999元</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height: 375px; display: flex;">
+                                <div v-for="i in 4" :key="i.id" class="product" style="width: calc(25% - 16px); border-top: 1px solid #5E86C1; background-color: #fafafa; margin-left: 20px; margin-top: 20px;">
+                                    <div style="text-align: center; height: 10%">
+                                        <span style="background-color: #5E86C1; color: #FFFFFF; padding:0 20px;">商品</span>
+                                    </div>
+                                    <div style="height: 200px; display: flex; text-align: center;">
+                                        <img src="../assets/img/product1.png" style="width: 100%" />
+                                    </div>
+                                    <div style="text-align: center; text-overflow: ellipsis; line-height: 25px;">
+                                        荣耀70 5G系列 8GB+256GB
+                                    </div>
+                                    <div style="text-align: center; text-overflow: ellipsis; line-height: 25px; color: gray;">
+                                        IMX800三主摄 | 旗舰芯片 | 100W超级快充
+                                    </div>
+                                    <div style="text-align: center; line-height: 40px;">
+                                        <span style="color: red;">2699元</span>
+                                        <span style="color: gray; text-decoration: line-through;">2999元</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </el-main>
+
+            <el-footer>
+                <Bottom></Bottom>
+            </el-footer>
+            
+        </el-container>
+    </div>
+    
+</template>
+
+<script>
+import Top from "./page/top.vue"
+import Bottom from "./page/bottom.vue"
+export default{
+    components: {Top, Bottom},
+    data(){
+        return {
+            fit: 'cover',
+            imgs: [
+                'https://img12.360buyimg.com/cms/jfs/t1/146964/7/27972/132908/627b9ae1E5c97b8fe/43f8670ad69cbe1b.jpg',
+                'https://img12.360buyimg.com/cms/jfs/t1/221273/30/12615/62667/6228069bE37802152/f9e013ca2efef111.jpg',
+                'https://img11.360buyimg.com/cms/jfs/t1/187638/26/19041/189060/611cdb27E4767186f/e1742923ce41918b.jpg',
+                'https://img12.360buyimg.com/cms/jfs/t1/147912/31/27406/163280/624d6e0fEa042d818/4c6fd9e4618c7329.jpg',
+                'https://img14.360buyimg.com/cms/jfs/t1/115701/39/25021/386549/62960710Ed45cd44d/da3ce75b013ce743.jpg'
+            ],
+            search: ''
+        }
+    },
+
+    methods: {
+        handleSizeChange(val){
+            console.log('每页${val}条');
+        },
+        handleCurrentChange(val){
+            console.log('当前页:${val}');
+        },
+        handleClick(tab, event){
+            console.log(tab, event);
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.el-main{
+    background-color: white;
+    color: #333;
+    width: 100%;
+    //text-align: center;
+    line-height: 160px;
+    .title-top{
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 50px;
+        color: #8a8a8a;
+        margin-left: 20px;
+    }
+    .title-top:hover{
+        color: orangered;
+    }
+    .item{
+        cursor: pointer;
+        height: 50px;
+        line-height: 50px;
+        padding: 0 0 0 20px;
+        color: #ffffff;
+        display: flex;
+    }
+    .item:hover{
+        background-color: #004D99;
+    }
+    .item-middle{
+        flex: 1;
+    }
+    .item-nav{
+        width: 10px;
+        margin-right: 20px;
+    }
+    .el-carousel_container{
+        height: 500px;
+    }
+    .product{
+        //vertical-align: top;
+        line-height: 110%;
+        transition: transform 2s ease 1s;
+    }
+    .product:hover{
+        cursor: pointer;
+        margin-top: -10px;
+    }
+    .more:hover{
+        cursor: pointer;
+        color: orangered;
+    }
+    img{
+        cursor: pointer;
+    }
+}
+.homepage{
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+}
+.el-container{
+    height: 100%;
+    //margin-bottom: 40px;
+}
+</style>
