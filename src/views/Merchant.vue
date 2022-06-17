@@ -1,5 +1,5 @@
 <template>
-    <div class="center">
+    <div class="merCenter">
         <el-container>
             <el-header>
                 <Top></Top>
@@ -12,18 +12,20 @@
                             <span style="font-weight: bold">二手交易平台</span>
                         </div>
                     </template>
-                    <el-menu :default-openeds="['1', '4']" default-active="this.$route.path" router>
+                    <el-menu :default-openeds="['1', '2']" default-active="this.$route.path" router>
                         <el-submenu index="1" style="background-color: #c3d1e3">
-                            <template slot="title"><i class="el-icon-message"></i>我的信息</template>
-                            <!-- <router-link class="el-menu-item index='1-1'" active-class="active" to="/userInfo">个人信息</router-link> -->
-                            <el-menu-item index="/userInfo">个人信息</el-menu-item>
+                            <template slot="title"><i class="el-icon-message"></i>商品</template>
+                            <el-menu-item index="/goodsList">商品列表</el-menu-item>
+                            <el-menu-item index="1-2">商品动态</el-menu-item>
                         </el-submenu>
                         <el-submenu index="2" style="background-color: #c3d1e3">
-                            <template slot="title"><i class="el-icon-menu"></i>我的钱包</template>
-                            <el-menu-item index="/rechargeRecord">充值记录</el-menu-item>
-                            <el-menu-item index="/paymentRecord">支付记录</el-menu-item>
+                            <template slot="title"><i class="el-icon-menu"></i>订单</template>
+                            <el-menu-item index="2-1">订单列表</el-menu-item>
+                            <el-menu-item index="2-1">已发货</el-menu-item>
+                            <el-menu-item index="2-2">已收货</el-menu-item>
+                            <el-menu-item index="2-3">退款申请</el-menu-item>
                         </el-submenu>
-                        <el-submenu index="3" style="background-color: #c3d1e3">
+                        <!-- <el-submenu index="3" style="background-color: #c3d1e3">
                             <template slot="title"><i class="el-icon-setting"></i>我的交易</template>
                             <el-menu-item index="/myCart">购物车</el-menu-item>
                             <el-menu-item index="/shoppingRecord">购买记录</el-menu-item>
@@ -32,7 +34,7 @@
                             <template slot="title"><i class="el-icon-setting"></i>评价管理</template>
                             <el-menu-item index="/myComments">我评价的</el-menu-item>
                             <el-menu-item index="/ReceivedComments">评价我的</el-menu-item>
-                        </el-submenu>
+                        </el-submenu> -->
                     </el-menu>
                 </el-aside>
                 <el-container>
@@ -49,23 +51,18 @@
 <script>
 import Top from "../views/page/top.vue"
 export default{
-    components: {Top},
-    data() {
+    name: 'merchant',
+    components:{Top},
+    data(){
         return{
 
-        }
-    },
-
-    methods: {
-        goto(path){
-            this.$router.push(path);
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.center{
+.merCenter{
     padding: 0px;
     margin: 0px;
     height: 100%;

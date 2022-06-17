@@ -6,6 +6,8 @@ import Login from '../views/Login.vue'
 import HomePage from '../views/HomePage.vue'
 import ProductDetails from '../views/ProductDetails.vue'
 import PersonalCenter from '../views/PersonalCenter.vue'
+import Merchant from '../views/Merchant.vue'
+import SearchResult from '../views/SearchResult.vue'
 
 Vue.use(VueRouter)
 
@@ -31,6 +33,11 @@ const routes = [
         component: ProductDetails
     },
     {
+        path: '/searchResult',
+        name: 'searchResult',
+        component: SearchResult
+    },
+    {
         path: '/personalCenter',
         name: 'personalCenter',
         component: PersonalCenter,
@@ -39,14 +46,63 @@ const routes = [
                 path: '/userInfo',
                 name: 'userInfo',
                 component: () => import('../views/user/UserInfo.vue')
+            },
+            {
+                path: '/rechargeRecord',
+                name: 'rechargeRecord',
+                component: () => import('../views/user/RechargeRecord.vue')
+            },
+            {
+                path: '/paymentRecord',
+                name: 'paymentRecord',
+                component: () => import('../views/user/PaymentRecord.vue')
+            },
+            {
+                path: '/myCart',
+                name: 'myCart',
+                component: () => import('../views/user/MyCart.vue')
+            },
+            {
+                path: '/shoppingRecord',
+                name: 'shoppingRecord',
+                component: () => import('../views/user/ShoppingRecord.vue')
+            },
+            {
+                path: '/myComments',
+                name: 'myComments',
+                component: () => import('../views/user/MyComments.vue')
+            },
+            {
+                path: '/receivedComments',
+                name: 'receivedComments',
+                component: () => import('../views/user/ReceivedComments.vue')
             }
         ]
     },
-    // {
-    //     path: '/userInfo',
-    //     name: 'userInfo',
-    //     component: UserInfo
-    // }
+    {
+        path: '/merchant',
+        name: 'merchant',
+        component: Merchant,
+        children: [
+            {
+                path: '/goodsList',
+                name: 'goodsList',
+                component: () => import('../views/shop/GoodsList.vue'),
+                // children: [
+                //     {
+                //         path: '/addProduct',
+                //         name: 'addProduct',
+                //         component: () => import('../views/shop/AddProduct.vue')
+                //     }
+                // ]
+            },
+            {
+                path: '/addProduct',
+                name: 'addProduct',
+                component: () => import('../views/shop/AddProduct.vue')
+            },
+        ]
+    },
 ]
 
 const router = new VueRouter({
