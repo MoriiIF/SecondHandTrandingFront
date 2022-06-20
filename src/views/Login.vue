@@ -37,7 +37,7 @@
           size="medium"
           type="primary"
           style="width: 100%"
-          @click.native.prevent="handleLogin">
+          @click.native.prevent="toLogin">
           <span v-if="!loading">登 录</span>
           <span v-else>登 录 中...</span>
         </el-button>
@@ -141,6 +141,22 @@ export default{
           return false
         }
       })
+    },
+    toLogin: function() {
+      setTimeout(this.$router.push('/login'), 3000)
+      var url = 'http://49.232.81.174:8080/users/login'
+      this.$http.get(url, {params: {
+        userId: this.loginForm.username,
+        password: this.loginForm.password
+      }}).then(result => {
+        if (result.data['data'] == 'success.') {
+          localStorage.setItem('userId', this.loginForm.username)
+          this.$router.push('/')
+        } else {
+          console.log(result.data['data'])
+        }
+      }
+      )
     },
     point(){
       const point = Cookies.get('point') !== undefined

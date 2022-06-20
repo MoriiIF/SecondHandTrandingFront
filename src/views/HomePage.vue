@@ -9,7 +9,7 @@
                 <div style="background: #ffffff; width: 80%; margin: 0 auto; ">
                     <div style="display: flex; border-radius: 6px;">
                         <div style="display: flex; flex: 1">
-                            <div class="title-top">物品1</div>
+                            <div class="title-top">{{userId}}</div>
                             <div class="title-top">物品2</div>
                             <div class="title-top">物品3</div>
                             <div class="title-top">物品4</div>
@@ -250,6 +250,7 @@ export default{
     components: {Top, Bottom},
     data(){
         return {
+            userId: localStorage.getItem('userId'),
             fit: 'cover',
             imgs: [
                 'https://img12.360buyimg.com/cms/jfs/t1/146964/7/27972/132908/627b9ae1E5c97b8fe/43f8670ad69cbe1b.jpg',
