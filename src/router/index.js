@@ -5,6 +5,7 @@ import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 import HomePage from '../views/HomePage.vue'
 import ProductDetails from '../views/ProductDetails.vue'
+import AdminCenter from '@/views/AdminCenter'
 import PersonalCenter from '../views/PersonalCenter.vue'
 import Merchant from '../views/Merchant.vue'
 import SearchResult from '../views/SearchResult.vue'
@@ -41,6 +42,18 @@ const routes = [
     {
         path: '/product/:id',
         component: ProductShowcase
+    },
+    {
+        path: '/adminCenter',
+        name: 'adminCenter',
+        component: AdminCenter,
+        children: [
+            {
+                path: '/userVerify',
+                name: 'userVerify',
+                component: () => import('../views/admin/userVerify.vue')
+            }
+        ]
     },
     {
         path: '/personalCenter',
