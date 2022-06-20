@@ -33,7 +33,7 @@
                     <template slot-scope="">
                         <p>
                             <el-button size="mime">查看</el-button>
-                            <el-button size="mime">下架</el-button>
+                            <el-button type="danger" size="mime">下架</el-button>
                         </p>
                     </template>
                 </el-table-column>

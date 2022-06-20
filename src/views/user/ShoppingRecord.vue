@@ -22,7 +22,7 @@
             <el-table-column label="商品操作" width="150">
                 <template slot-scope="scope">
                     <el-button type="text" @click="applyForReturn(scope.$index, scope.row)" v-if="clickReturn" >{{scope.row.productOperationMessage}}</el-button>
-                    <span v-show="flag">正在退货</span>
+                    <span v-show="flag">{{scope.row.productOperationMessage}}</span>
                 </template>
             </el-table-column>
             <el-table-column label="实付款" width="100">
@@ -37,7 +37,8 @@
             </el-table-column>
             <el-table-column label="交易操作" width="100">
                 <template slot-scope="scope">
-                    <el-button>评价</el-button>
+                    <el-button size="small" @click="goto(scope.row)" v-if="scope.row.tradingStatus === '交易成功'">评价</el-button>
+                    <el-button type="danger" size="small" v-else-if="scope.row.tradingStatus === '待收货'">确认收货</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -88,10 +89,13 @@ export default {
                     message: '已发起退货，等待商家处理...'
                 });
                 row.tradingStatus = "正在退货";
-                //row.productOperationMessage = '正在退货';
+                row.productOperationMessage = '正在退货';
                 this.clickReturn = false;
                 this.flag = true;
             })
+        },
+        goto(row){
+            this.$router.push('/comment');
         }
     }
 }

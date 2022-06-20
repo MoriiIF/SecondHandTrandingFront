@@ -1,27 +1,29 @@
 <template>
     <div class="productInfo" style="margin-top: 50px">
-        <el-form :model="value" rules="rules" ref="productInfoForm" label-width="120px" style="width: 600px" size="small">
-            <el-form-item label="商品分类：" prop="productCategoryId">
-                <el-cascader v-model="selectProductCateValue" :options="productCateOptions"></el-cascader>
-            </el-form-item> 
+        <el-form :model="ruleForm" rules="rules" ref="ruleForm" label-width="120px" style="width: 600px" size="small">
             <el-form-item label="商品名称：" prop="name">
-                <el-input v-model="value.name"></el-input>
+                <el-input v-model="ruleForm.name"></el-input>
             </el-form-item>
+            <el-form-item label="商品分类：" prop="category">
+                <!-- <el-cascader v-model="ruleForm.category" :options="productCateOptions"></el-cascader> -->
+                <el-select v-model="ruleForm.category" placeholder="请选择商品分类">
+                </el-select>
+            </el-form-item> 
             <el-form-item label="商品介绍：">
                 <el-input
                     :autosize="true"
-                    v-model="value.description"
+                    v-model="ruleForm.description"
                     type="textarea"
                     placeholder="请输入内容"></el-input>
             </el-form-item>
             <el-form-item label="商品货号：">
-                <el-input v-model="value.productSn"></el-input>
+                <el-input v-model="ruleForm.productId"></el-input>
             </el-form-item>
             <el-form-item label="商品售价：">
-                <el-input v-model="value.price"></el-input>
+                <el-input v-model="ruleForm.price"></el-input>
             </el-form-item>
             <el-form-item label="商品库存：">
-                <el-input v-model="value.stock"></el-input>
+                <el-input v-model="ruleForm.stock"></el-input>
             </el-form-item>
             <el-form-item label="商品图片">
                 <el-upload
@@ -36,7 +38,7 @@
                 </el-dialog>
             </el-form-item>
             <el-form-item style="text-align: center">
-                <el-button type="primary" size="medium" @click="handleNext('productInfo')">下一步，填写商品属性</el-button>
+                <el-button type="primary" size="medium" @click="submitProduct('ruleForm')">提交</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -58,6 +60,15 @@ export default {
             dialogVisible: false,
             selectProductCateValue: [],
             productCateOptions: [],
+            ruleForm: {
+                name: '',
+                category: '',
+                description: '',
+                productId: '',
+                price: '',
+                stock: '',
+
+            },
             rules: {
                 name: [
                     {
@@ -72,7 +83,7 @@ export default {
                         trigger: 'blur'
                     }
                 ],
-                productCategoryId: [
+                category: [
                     {
                         required: true,
                         message: '请选择商品分类',
@@ -83,6 +94,27 @@ export default {
                     {
                         required: true,
                         message: '请输入商品介绍',
+                        trigger: 'blur'
+                    }
+                ],
+                productId: [
+                    {
+                        required: true,
+                        message: '请输入商品货号',
+                        trigger: 'blur'
+                    }
+                ],
+                price: [
+                    {
+                        required: true,
+                        message: '请输入商品价格',
+                        trigger: 'blur'
+                    }
+                ],
+                stock: [
+                    {
+                        required: true,
+                        message: '请输入商品库存',
                         trigger: 'blur'
                     }
                 ]
@@ -97,16 +129,25 @@ export default {
             this.productImageUrl = file.url;
             this.dialogVisible = true;
         },
-        handleNext(formName){
+        // handleNext(formName){
+        //     this.$refs[formName].validate((valid) => {
+        //         if(valid){
+        //             this.$emit('nextStep');
+        //         }else {
+        //             this.$message({
+        //                 message: '验证失败',
+        //                 type: 'error',
+        //                 duration: 1000
+        //             });
+        //             return false;
+        //         }
+        //     });
+        // },
+        submitProduct(formName){
             this.$refs[formName].validate((valid) => {
                 if(valid){
-                    this.$emit('nextStep');
-                }else {
-                    this.$message({
-                        message: '验证失败',
-                        type: 'error',
-                        duration: 1000
-                    });
+                    alert('submit!');
+                }else{
                     return false;
                 }
             });

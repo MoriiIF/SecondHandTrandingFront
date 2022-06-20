@@ -111,7 +111,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .myCart{
     margin: 32px;
     background: white;

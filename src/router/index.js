@@ -98,19 +98,27 @@ const routes = [
                 path: '/goodsList',
                 name: 'goodsList',
                 component: () => import('../views/shop/GoodsList.vue'),
-                // children: [
-                //     {
-                //         path: '/addProduct',
-                //         name: 'addProduct',
-                //         component: () => import('../views/shop/AddProduct.vue')
-                //     }
-                // ]
             },
             {
                 path: '/addProduct',
                 name: 'addProduct',
                 component: () => import('../views/shop/AddProduct.vue')
             },
+            {
+                path: '/returnRequest',
+                name: 'returnRequest',
+                component: () => import('../views/shop/ReturnRequest.vue')
+            },
+            {
+                path: '/shipped',
+                name: 'shipped',
+                component: () => import('../views/shop/Shipped.vue')
+            },
+            {
+                path: '/received',
+                name: 'received',
+                component: () => import('../views/shop/Received.vue')
+            }
         ]
     },
 ]

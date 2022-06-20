@@ -24,10 +24,26 @@
                     <span>店铺动态评分</span>
                 </h2>
                 <div class="stars">
-                    商品与描述相符 <el-rate v-model="star" show-text></el-rate>
-                    卖家的服务态度 <el-rate v-model="star" show-text></el-rate>
-                    卖家的发货速度 <el-rate v-model="star" show-text></el-rate>
+                    <!-- <span class="star-one">商品与描述相符 </span> -->
+                    <div class="star-one">
+                        <label>商品与描述相符 </label>
+                        <el-rate class="star-one" v-model="star1" show-text ></el-rate>
+                    </div>
+                    <div class="star-two">
+                    <!-- <span class="star-two">卖家的服务态度 </span> -->
+                        <label>卖家的服务态度 </label>
+                        <el-rate class="star-two" v-model="star2" show-text></el-rate>
+                    </div>
+                    <div class="star-three">
+                    <!-- <span class="star-three">卖家的发货速度 </span> -->
+                        <label>卖家的发货速度 </label>
+                        <el-rate class="star-three" v-model="star3" show-text></el-rate>
+                    </div>
                 </div>
+            </div>
+            <el-divider></el-divider>
+            <div class="submit">
+                <el-button type="primary" @click="submitComment()">发表评论</el-button>
             </div>
         </div>
     </div>
@@ -40,7 +56,9 @@ export default{
         return{
             someProductInfo: [],
             textarea: '',
-            star: null,
+            star1: null,
+            star2: null,
+            star3: null
 
         }
     },
@@ -55,6 +73,9 @@ export default{
                 this.dataLoading = false;
             });
         },
+        submitComment(){
+
+        }
     }
 }
 </script>
@@ -89,6 +110,7 @@ export default{
 }
 .comment-text{
     padding-top: 20px;
+    padding-bottom: 70px;
     clear: both;
 }
 .pro-detail{
@@ -140,6 +162,7 @@ export default{
     color: #999;
     background: #f3f3f3;
     width: 130px;
+    line-height: 48px;
     text-align: center;
     position: absolute;
     left: 98px;
@@ -148,6 +171,11 @@ export default{
 }
 .stars{
     padding: 20px;
+}
+.star-one,
+.star-two,
+.star-three{
+    display: inline-block;
 }
 
 </style>
