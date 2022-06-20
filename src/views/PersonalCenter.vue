@@ -26,7 +26,7 @@
                         <el-submenu index="3" style="background-color: #c3d1e3">
                             <template slot="title"><i class="el-icon-setting"></i>我的交易</template>
                             <el-menu-item index="/myCart">购物车</el-menu-item>
-                            <el-menu-item index="/shoppingRecord">购买记录</el-menu-item>
+                            <el-menu-item index="/shoppingRecord">订单列表</el-menu-item>
                         </el-submenu>
                         <el-submenu index="4" style="background-color: #c3d1e3">
                             <template slot="title"><i class="el-icon-setting"></i>评价管理</template>

@@ -25,7 +25,7 @@
             </el-form-item>
             <el-form-item label="商品图片">
                 <el-upload
-                    action=""
+                    action="http://127.0.0.1:4523/m1/1074270-0-default/upload/commodityPic"
                     list-type="picture-card"
                     :on-preview="handlePictureCardPreview"
                     :on-remove="handleRemove">

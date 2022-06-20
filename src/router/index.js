@@ -8,6 +8,7 @@ import ProductDetails from '../views/ProductDetails.vue'
 import PersonalCenter from '../views/PersonalCenter.vue'
 import Merchant from '../views/Merchant.vue'
 import SearchResult from '../views/SearchResult.vue'
+import ProductShowcase from '../views/ProductShowcase.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,10 @@ const routes = [
         path: '/searchResult',
         name: 'searchResult',
         component: SearchResult
+    },
+    {
+        path: '/product/:id',
+        component: ProductShowcase
     },
     {
         path: '/personalCenter',
@@ -76,6 +81,11 @@ const routes = [
                 path: '/receivedComments',
                 name: 'receivedComments',
                 component: () => import('../views/user/ReceivedComments.vue')
+            },
+            {
+                path: '/comment',
+                name: 'comment',
+                component: () => import('../views/user/CommentToProduct.vue')
             }
         ]
     },
