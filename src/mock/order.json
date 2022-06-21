@@ -1,35 +1,13 @@
 {
-    "data": [
-        {
-            "productImg": "https://img.alicdn.com/imgextra/i3/1791682552/O1CN016vpzN11UirTXsN1uV_!!1791682552.jpg_430x430q90.jpg",
-            "shop": "",
-            "name": "手机壳",
-            "price": "7.80",
-            "count": "1",
-            "productOperationMessage": "申请退货",
-            "cost": "7",
-            "tradingStatus": "交易成功"
-        },
-        {
-            "productImg": "https://img.alicdn.com/imgextra/i3/1791682552/O1CN016vpzN11UirTXsN1uV_!!1791682552.jpg_430x430q90.jpg",
-            "shop": "",
-            "name": "手机壳",
-            "price": "17.80",
-            "count": "1",
-            "productOperationMessage": "申请退货",
-            "cost": "7",
-            "tradingStatus": "交易失败"
-        },
-        {
-            "productImg": "https://img.alicdn.com/imgextra/i3/1791682552/O1CN016vpzN11UirTXsN1uV_!!1791682552.jpg_430x430q90.jpg",
-            "shop": "",
-            "name": "手机壳",
-            "price": "17.80",
-            "count": "1",
-            "productOperationMessage": "申请退货",
-            "cost": "7",
-            "tradingStatus": "待收货"
-        }
-    ]
+    "data": {
+        "productImg": "https://img.alicdn.com/imgextra/i3/1791682552/O1CN016vpzN11UirTXsN1uV_!!1791682552.jpg_430x430q90.jpg",
+        "shop": "卖家卖家卖家啊",
+        "name": "手机壳",
+        "price": "7.80",
+        "count": "1",
+        "productOperationMessage": "申请退货",
+        "cost": "7",
+        "tradingStatus": "交易成功"
+    }
     
 }

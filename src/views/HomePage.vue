@@ -2,14 +2,11 @@
     <div class="homepage">
         <el-container>
             <Top></Top>
-            <!-- <el-header>
-                <Top></Top>
-            </el-header> -->
             <el-main style="width: 100% font-size: 14px; padding: 20px 0;">
                 <div style="background: #ffffff; width: 80%; margin: 0 auto; ">
                     <div style="display: flex; border-radius: 6px;">
                         <div style="display: flex; flex: 1">
-                            <div class="title-top">{{userId}}</div>
+                            <div class="title-top">物品1</div>
                             <div class="title-top">物品2</div>
                             <div class="title-top">物品3</div>
                             <div class="title-top">物品4</div>

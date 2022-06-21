@@ -15,7 +15,7 @@
           type="text"
           auto-complete="off"
           placeholder="账号">
-          <icon slot="prefix" name="user" scale="20" />
+          <i class="el-icon-user-solid" slot="prefix" name="user" scale="20" />
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -25,7 +25,7 @@
           auto-complete="off"
           placeholder="密码"
           @keyup.enter.native="handleLogin">
-          <icon slot="prefix" name="password" scale="20" />
+          <i class="el-icon-key" slot="prefix" name="password" scale="20" />
         </el-input>
       </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin: 0 0 25px 0">
@@ -142,22 +142,43 @@ export default{
         }
       })
     },
-    toLogin: function() {
-      setTimeout(this.$router.push('/login'), 3000)
-      var url = 'http://49.232.81.174:8080/users/login'
-      this.$http.get(url, {params: {
-        userId: this.loginForm.username,
-        password: this.loginForm.password
-      }}).then(result => {
-        if (result.data['data'] == 'success.') {
-          localStorage.setItem('userId', this.loginForm.username)
-          this.$router.push('/')
-        } else {
-          console.log(result.data['data'])
+    toLogin() {
+      // setTimeout(this.$router.push('/login'), 3000)
+      //this.$router.push('/');
+      var url = 'http://49.232.81.174:8080/users/login';
+      var _this = this;
+      _this.axios.get(url, {
+        params: {
+          'userId': _this.loginForm.username,
+          'password': _this.loginForm.password
         }
-      }
-      )
+      }).then(function(res){
+        if(res.data.message == '操作成功'){
+          localStorage.setItem('userId', _this.loginForm.username);
+          _this.loginForm.username = res.data.data.userId;
+          _this.$router.push('/');
+        }else {
+          console.log(res.data.data);
+        }
+      })
     },
+    // toLogin: function() {
+    //   // setTimeout(this.$router.push('/login'), 3000)
+    //   //this.$router.push('/');
+    //   var url = 'http://49.232.81.174:8080/users/login'
+    //   this.$http.get(url, {params: {
+    //     userId: this.loginForm.username,
+    //     password: this.loginForm.password
+    //   }}).then(result => {
+    //     if (result.data['data'] == 'success.') {
+    //       localStorage.setItem('userId', this.loginForm.username)
+    //       this.$router.push('/')
+    //     } else {
+    //       console.log(result.data['data'])
+    //     }
+    //   }
+    //   )
+    // },
     point(){
       const point = Cookies.get('point') !== undefined
       if(point){

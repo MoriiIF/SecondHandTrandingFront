@@ -73,7 +73,7 @@
                     <el-radio @click="checkRadio($event)" v-model="ruleForm.type_radio" label="1">个人用户</el-radio>
                     <el-radio @click="checkRadio($event)" v-model="ruleForm.type_radio" label="2">商家</el-radio>
                 </el-form-item>
-              <el-form-item label="用户ID" prop="name">
+              <el-form-item label="用户ID" prop="id">
                 <el-input v-model="ruleForm.id" />
               </el-form-item>
                 <el-form-item label="用户名" prop="name">
@@ -214,6 +214,12 @@ export default{
                     message: '请选择注册类型',
                     trigger: 'blur'
                 }],
+                id: [{
+                    required: true,
+                    type: 'string',
+                    message: '请输入ID',
+                    trigger: 'blur'
+                }],
                 name: [{
                     required: true,
                     type: 'string',
@@ -351,24 +357,47 @@ export default{
             })
         },
 
-      toLogin: function(){
-        setTimeout(this.$router.push('/login'), 3000)
-        var url = 'http://49.232.81.174:8080/users/register';
-        var postData = {
-          "id": this.ruleForm.id,
-          "name": this.ruleForm.name,
-          "phone": this.ruleForm.phone,
-          "sex": this.ruleForm.sex_radio,
-          "bank": this.ruleForm.bank,
-          "password":this.ruleForm.pwd,
-          "type": this.ruleForm.type_radio,
-          "admin": false
-        }
+        toLogin: function(){
+            setTimeout(this.$router.push('/login'), 3000)
+            var _this = this;
+            var url = 'http://49.232.81.174:8080/users/register';
+            var postData = {
+            "id": this.ruleForm.id,
+            "name": this.ruleForm.name,
+            "phone": this.ruleForm.phone,
+            "sex": this.ruleForm.sex_radio,
+            "bank": this.ruleForm.bank,
+            "password":this.ruleForm.pwd,
+            "type": this.ruleForm.type_radio,
+            "admin": false
+            };
+            _this.$http.post(url, _this.$qs.stringify(postData))
+                       .then(function(res){
+                        if(res.data.code == 200){
 
-        this.$http.post(url, JSON.stringify(postData), {emulateJSON: true}).then(result => {
-          console.log(result.data)
-        })
-      },
+                        }
+                       })
+
+        },
+
+    //   toLogin: function(){
+    //     setTimeout(this.$router.push('/login'), 3000)
+    //     var url = 'http://49.232.81.174:8080/users/register';
+    //     var postData = {
+    //       "id": this.ruleForm.id,
+    //       "name": this.ruleForm.name,
+    //       "phone": this.ruleForm.phone,
+    //       "sex": this.ruleForm.sex_radio,
+    //       "bank": this.ruleForm.bank,
+    //       "password":this.ruleForm.pwd,
+    //       "type": this.ruleForm.type_radio,
+    //       "admin": false
+    //     }
+
+    //     this.$http.post(url, JSON.stringify(postData), {emulateJSON: true}).then(result => {
+    //       console.log(result.data)
+    //     })
+    //   },
 
         // toLogin: function(){
         //     setTimeout(this.$router.push('/login'), 3000)

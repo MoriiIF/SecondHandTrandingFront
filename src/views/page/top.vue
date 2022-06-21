@@ -5,7 +5,10 @@
                     <div style="text-align: left; display: flex; flex: 1;">
                         <div class="active">校园二手交易平台</div>
                     </div>
-                    <div style="width: 258px; text-align: right; display: flex;">
+                    <div v-if="userId" style="width: 258px; text-align: right; display: flex;">
+                        <div class="active" @click="goCenter">{{userId}}</div>
+                    </div>
+                    <div v-else style="width: 258px; text-align: right; display: flex;">
                         <div class="active" @click="goLogin()">登录</div>
                         <div class="active" @click="goRegister()">注册</div>
                     </div>
@@ -18,7 +21,12 @@
 export default{
     data(){
         return {
-
+            userId: localStorage.getItem('userId'),
+        }
+    },
+    computed: {
+        userId(){
+            return localStorage.getItem('userId');
         }
     },
 
@@ -29,6 +37,9 @@ export default{
         goRegister(){
             this.$router.replace('/register')
         },
+        goCenter(){
+            this.$router.push('/personalCenter')
+        }
     }
 }
 </script>
