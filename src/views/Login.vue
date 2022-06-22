@@ -37,7 +37,7 @@
           size="medium"
           type="primary"
           style="width: 100%"
-          @click.native.prevent="toLogin">
+          @click="toLogin">
           <span v-if="!loading">登 录</span>
           <span v-else>登 录 中...</span>
         </el-button>
@@ -153,12 +153,12 @@ export default{
           'password': _this.loginForm.password
         }
       }).then(function(res){
-        if(res.data.message == '操作成功'){
+        if(res.data.data == 'success.'){
           localStorage.setItem('userId', _this.loginForm.username);
           _this.loginForm.username = res.data.data.userId;
           _this.$router.push('/');
         }else {
-          console.log(res.data.data);
+          console.log(res.data.data)
         }
       })
     },

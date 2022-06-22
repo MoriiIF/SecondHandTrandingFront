@@ -17,14 +17,14 @@
         <el-form ref="form" :model="form" label-width="80px" style="margin-top: 80px">
             <el-form-item label="昵称">
                 <el-col span="6">
-                    <el-input v-model="form.name" placeholder="请输入用户名" :disabled="inputUsable()"></el-input>
+                    <el-input v-model="form.name" :disabled="inputUsable()"></el-input>
                 </el-col>
             </el-form-item>
             <el-form-item label="性别" >
                 <el-col span="3">
                     <el-radio-group v-model="form.sex" :disabled="inputUsable()">
-                        <el-radio label="男"></el-radio>
-                        <el-radio label="女"></el-radio>
+                        <el-radio :label="'male'" >男</el-radio>
+                        <el-radio :label="'female'" >女</el-radio>
                     </el-radio-group>
                 </el-col>
             </el-form-item>
@@ -66,7 +66,7 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="updatePwdDialog = false">取消</el-button>
-                <el-button type="primary" @click="updatePwdDialog = false">保存</el-button>
+                <el-button type="primary" @click="changePassword">保存</el-button>
             </div>
         </el-dialog>
         <el-divider content-position="left">
@@ -147,6 +147,8 @@
 </template>
 
 <script>
+import { result } from 'lodash'
+
 const pca = require('@/assets/address/pca-code.json')
 export default{
     name: 'userInfo',
@@ -215,8 +217,27 @@ export default{
     created(){
         this.loadAddressData()
     },
+    mounted() {
+        this.getUserInfo()
+    },
 
     methods: {
+        getUserInfo() {
+            var url = "http://49.232.81.174:8080/users/getUserInfo"
+            this.axios.get(url, {
+                params: {
+                id: localStorage.getItem('userId')
+            }
+            }).then(result => {
+                console.log(result)
+                if (result.data['message'] == '操作成功') {
+                    this.form.name = result.data['data']['name']
+                    this.form.sex = result.data['data']['sex']
+                    this.form.mail = result.data['data']['email']
+                    console.log(this.form)
+                }
+            })
+        },
         modifyorSave(){
             var savetext = this.btnText;
             this.btnText = this.$refs.modifybtn.$el.innerText;
@@ -225,7 +246,9 @@ export default{
         inputUsable(){
             if(this.btnText === '修改基本信息'){
                 //this.flag = true;
+                console.log(this.form)
                 return false;
+                
             } else if(this.btnText === '保存修改'){
                 //this.flag = false;
                 return true;
@@ -279,6 +302,9 @@ export default{
         },
         deleteAddress(index, rows){
             rows.splice(index,1)
+        },
+        changePassword() {
+            
         }
     }
 }

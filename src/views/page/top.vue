@@ -7,6 +7,7 @@
                     </div>
                     <div v-if="userId" style="width: 258px; text-align: right; display: flex;">
                         <div class="active" @click="goCenter">{{userId}}</div>
+                        <div class="active" @click="logOut">登出</div>
                     </div>
                     <div v-else style="width: 258px; text-align: right; display: flex;">
                         <div class="active" @click="goLogin()">登录</div>
@@ -39,6 +40,10 @@ export default{
         },
         goCenter(){
             this.$router.push('/personalCenter')
+        },
+        logOut() {
+            localStorage.setItem('userId', '')
+            this.$router.push('/login')
         }
     }
 }

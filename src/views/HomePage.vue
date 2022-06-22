@@ -176,58 +176,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div style="height: 50px; line-height: 50px; margin-top: 50px; color:gray; display: flex;">
-                        <div style="font-size: 25px;">手机</div>
-                        <div style="flex: 1; text-align: right;" class="more">查看全部</div>
-                    </div>
-                    <div style="display: flex;">
-                        <div style="width: calc(20% - 16px);">
-                            <img src="../assets/img/upro.png" style="width: 100%; height: 725px;" />
-                        </div>
-                        <div style="flex: 1;">
-                            <div style="height: 350px; display: flex;">
-                                <div v-for="i in 4" :key="i.id" class="product" style="width: calc(25% - 16px); border-top: 1px solid #5E86C1; background-color: #fafafa; margin-left: 20px;">
-                                    <div style="text-align: center; height: 10%">
-                                        <span style="background-color: #5E86C1; color: #FFFFFF; padding:0 20px;">商品</span>
-                                    </div>
-                                    <div style="height: 200px; display: flex; text-align: center;">
-                                        <img src="../assets/img/product1.png" style="width: 100%" />
-                                    </div>
-                                    <div style="text-align: center; text-overflow: ellipsis; line-height: 25px;">
-                                        荣耀70 5G系列 8GB+256GB
-                                    </div>
-                                    <div style="text-align: center; text-overflow: ellipsis; line-height: 25px; color: gray;">
-                                        IMX800三主摄 | 旗舰芯片 | 100W超级快充
-                                    </div>
-                                    <div style="text-align: center; line-height: 40px;">
-                                        <span style="color: red;">2699元</span>
-                                        <span style="color: gray; text-decoration: line-through;">2999元</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div style="height: 375px; display: flex;">
-                                <div v-for="i in 4" :key="i.id" class="product" style="width: calc(25% - 16px); border-top: 1px solid #5E86C1; background-color: #fafafa; margin-left: 20px; margin-top: 20px;">
-                                    <div style="text-align: center; height: 10%">
-                                        <span style="background-color: #5E86C1; color: #FFFFFF; padding:0 20px;">商品</span>
-                                    </div>
-                                    <div style="height: 200px; display: flex; text-align: center;">
-                                        <img src="../assets/img/product1.png" style="width: 100%" />
-                                    </div>
-                                    <div style="text-align: center; text-overflow: ellipsis; line-height: 25px;">
-                                        荣耀70 5G系列 8GB+256GB
-                                    </div>
-                                    <div style="text-align: center; text-overflow: ellipsis; line-height: 25px; color: gray;">
-                                        IMX800三主摄 | 旗舰芯片 | 100W超级快充
-                                    </div>
-                                    <div style="text-align: center; line-height: 40px;">
-                                        <span style="color: red;">2699元</span>
-                                        <span style="color: gray; text-decoration: line-through;">2999元</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </el-main>
 
