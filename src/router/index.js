@@ -30,7 +30,7 @@ const routes = [
         component: HomePage
     },
     {
-        path: '/productDetails',
+        path: '/productDetails/:id',
         name: 'prodectDetails',
         component: ProductDetails
     },
@@ -76,9 +76,9 @@ const routes = [
                 component: () => import('../views/user/PaymentRecord.vue')
             },
             {
-                path: '/myCart',
-                name: 'myCart',
-                component: () => import('../views/user/MyCart.vue')
+                path: '/cart',
+                name: 'cart',
+                component: () => import('../views/user/Cart.vue')
             },
             {
                 path: '/shoppingRecord',

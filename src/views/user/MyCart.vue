@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import productData from '../ProductShowcase.vue';
+import productData from '../ProductDetails.vue';
 export default {
     name: 'myCart',
     data(){

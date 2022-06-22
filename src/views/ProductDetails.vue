@@ -63,10 +63,11 @@ export default{
         return {
             attributes: [],
             num: 1,
-            search: ''
+            search: '',
+            id: null,
         }
     },
-    created(){
+    mounted(){
         this.getProduct();
     },
     methods: {
@@ -75,6 +76,7 @@ export default{
             import('@/mock/product.json').then((res) => {
                 this.attributes = res.data;
                 this.dataLoading = false;
+                this.id = parseInt(this.attributes.id);
             });
         },
     }
@@ -177,6 +179,9 @@ export default{
 .details-sku{
     padding: 10px 0 12px;
     position: relative;
+}
+.description{
+    border: #c9c9c9 solid 1px;
 }
 .sku{
     padding-bottom: 6px;
