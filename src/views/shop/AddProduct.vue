@@ -9,6 +9,7 @@
                 <el-form-item label="商品分类：" prop="category">
                     <!-- <el-cascader v-model="ruleForm.category" :options="productCateOptions"></el-cascader> -->
                     <el-select v-model="ruleForm.category" placeholder="请选择商品分类">
+                    <el-option label="数码" value="数码"></el-option>
                     </el-select>
                 </el-form-item> 
                 <el-form-item label="商品介绍：" prop="description">
@@ -18,9 +19,6 @@
                         type="textarea"
                         placeholder="请输入内容"></el-input>
                 </el-form-item>
-                <el-form-item label="商品货号：" prop="productId">
-                    <el-input v-model="ruleForm.productId"></el-input>
-                </el-form-item>
                 <el-form-item label="商品售价：" prop="price">
                     <el-input v-model="ruleForm.price"></el-input>
                 </el-form-item>
@@ -29,10 +27,12 @@
                 </el-form-item>
                 <el-form-item label="商品图片：">
                     <el-upload
-                        action="https://jsonplaceholder.typicode.com/posts/"
+                        action="http://49.232.81.174:8080/upload/commodityPic"
                         list-type="picture-card"
+                        :data="uploadData"
                         :on-preview="handlePictureCardPreview"
-                        :on-remove="handleRemove">
+                        :on-remove="handleRemove"
+                        :on-success="uploadSuccess">
                         <i class="el-icon-plus"></i>
                     </el-upload>
                     <el-dialog :visible.sync="dialogVisible">
@@ -40,7 +40,7 @@
                     </el-dialog>
                 </el-form-item>
                 <el-form-item style="text-align: center">
-                    <el-button type="primary" size="medium" @click="submitProduct('ruleForm')">提交</el-button>
+                    <el-button type="primary" size="medium" @click="submitProduct(ruleForm)">提交</el-button>
                 </el-form-item>
             </el-form>
         </el-card>
@@ -56,14 +56,16 @@ export default{
             dialogVisible: false,
             selectProductCateValue: [],
             productCateOptions: [],
+            uploadData: {},
+            picUrl: "",
             ruleForm: {
+                sku: '',
                 name: '',
                 category: '',
                 description: '',
-                productId: '',
                 price: '',
                 stock: '',
-
+                picture: '',
             },
             rules: {
                 name: [
@@ -93,13 +95,6 @@ export default{
                         trigger: 'blur'
                     }
                 ],
-                productId: [
-                    {
-                        required: true,
-                        message: '请输入商品货号',
-                        trigger: 'blur'
-                    }
-                ],
                 price: [
                     {
                         required: true,
@@ -125,6 +120,22 @@ export default{
             this.productImageUrl = file.url;
             this.dialogVisible = true;
         },
+        uploadSuccess(response) {
+           this.ruleForm.picture = response.data['url']
+        },
+        getCommoditySku() {
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+            this.axios.get("http://49.232.81.174:8080/commodity/getCommoditySku").then(result => {
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+                if (result.data['message'] == '操作成功') {
+                    this.uploadData = {
+                        sku: result.data['data']
+                    }
+                }
+            })
+        },
         // handleNext(formName){
         //     this.$refs[formName].validate((valid) => {
         //         if(valid){
@@ -139,15 +150,18 @@ export default{
         //         }
         //     });
         // },
-        submitProduct(formName){
-            this.$refs[formName].validate((valid) => {
-                if(valid){
-                    alert('已上传审核，等待审核通过！');
-                }else{
-                    return false;
-                }
-            });
+        submitProduct(ruleForm){
+            console.log(ruleForm)
+            ruleForm.sku = this.uploadData['sku']
+            this.axios.post("http://49.232.81.174:8080/commodity/add", ruleForm).then(function(response) {
+                console.log(response)
+            }).catch(function(error) {
+                console.log(error)
+            })
         }
+    },
+    mounted: function() {
+        this.getCommoditySku()
     }
 }
 </script>
