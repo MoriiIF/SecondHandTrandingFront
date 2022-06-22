@@ -250,11 +250,11 @@ export default{
             userId: localStorage.getItem('userId'),
             fit: 'cover',
             imgs: [
-                'https://img12.360buyimg.com/cms/jfs/t1/146964/7/27972/132908/627b9ae1E5c97b8fe/43f8670ad69cbe1b.jpg',
-                'https://img12.360buyimg.com/cms/jfs/t1/221273/30/12615/62667/6228069bE37802152/f9e013ca2efef111.jpg',
-                'https://img11.360buyimg.com/cms/jfs/t1/187638/26/19041/189060/611cdb27E4767186f/e1742923ce41918b.jpg',
-                'https://img12.360buyimg.com/cms/jfs/t1/147912/31/27406/163280/624d6e0fEa042d818/4c6fd9e4618c7329.jpg',
-                'https://img14.360buyimg.com/cms/jfs/t1/115701/39/25021/386549/62960710Ed45cd44d/da3ce75b013ce743.jpg'
+                'http://49.232.81.174:8080/slide/1.jpg',
+                'http://49.232.81.174:8080/slide/2.jpg',
+                'http://49.232.81.174:8080/slide/3.jpg',
+                'http://49.232.81.174:8080/slide/4.jpg',
+                'http://49.232.81.174:8080/slide/5.jpg'
             ],
             search: ''
         }
