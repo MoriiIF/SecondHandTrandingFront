@@ -99,6 +99,11 @@ const routes = [
                 path: '/comment',
                 name: 'comment',
                 component: () => import('../views/user/CommentToProduct.vue')
+            },
+            {
+                path: '/orderConfirm',
+                name: 'orderConfirm',
+                component: () => import('../views/user/orderConfirm.vue')
             }
         ]
     },

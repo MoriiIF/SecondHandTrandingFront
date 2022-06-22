@@ -10,27 +10,26 @@
                     <strong class="totalPrice">
                         <span class="total">￥ {{sum}}</span>
                     </strong>
-                    <el-button class="submit-btn">结 算</el-button>
+                    <el-button class="submit-btn" :disabled="selectionProduct == 0 ? true: false" @click="submitCart">结 算</el-button>
                 </div>
             </div>
             <div class="cart-main">
-                <el-table ref="cartTable" :data="productInCart" tooltip-effect="dark" style="width: 100%" @select="selectionRow">
+                <el-table ref="cartTable" :data="productInCart" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" empty-text="购物车空空如也~">
                     <el-table-column type="selection" width="70">
                     </el-table-column>
                     <el-table-column label="商品信息" width="100">
                         <template slot-scope="scope">
                             <img :src="scope.row.productImg" alt="" width="80px" height="80px">
-                            
                         </template>
                     </el-table-column>
                     <el-table-column width="300">
                         <template slot-scope="scope">
-                            <span>{{scope.row.name}}</span>
+                            <span style="overflow: hidden;">{{scope.row.name}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column label="店铺" width="120">
                         <template slot-scope="scope">
-                            <span>{{scope.row.shop}}</span>
+                            <span style="overflow: hidden;">{{scope.row.shop}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column label="单价" width="100">
@@ -40,12 +39,13 @@
                     </el-table-column>
                     <el-table-column label="数量" width="170">
                         <template slot-scope="scope">
-                            <el-input-number size="mini" v-model="scope.row.num" :min="1" :max="99"></el-input-number>
+                            <el-input-number size="mini" v-model="scope.row.count" :min="1" :max="99"></el-input-number>
                         </template>
                     </el-table-column>
                     <el-table-column label="金额" width="170">
                         <template slot-scope="scope">
-                            <span style="color: red;">￥ {{getCost(scope.row.num, scope.row.price)}}</span>
+                            <span style="color: red;">￥ {{(scope.row.price * scope.row.count).toFixed(2)}}</span>
+                            <!-- <span style="color: red;">￥{{getCost(scope.$row, scope.row.count, scope.row.price)}}</span> -->
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" width="150">
@@ -65,13 +65,20 @@ export default{
     data(){
         return {
             productInCart: [],
-            sum: 0.00,
+            selectionProduct: [],
         }
     },
     mounted(){
         this.getProduct();
-        this.getCost(num, price);
-        this.selectionRow(selection, row);
+    },
+    computed: {
+        sum(){
+            var price_total = 0;
+            for(var i = 0; i < this.selectionProduct.length; i++){
+                price_total += parseFloat((this.selectionProduct[i].price * this.selectionProduct[i].count).toFixed(2));
+            }
+            return price_total;
+        }
     },
     watch: {
         
@@ -87,16 +94,56 @@ export default{
         deleteOne(index, rows){
             rows.splice(index, 1);
         },
-        getCost(num, price){
-            return (num * price).toFixed(2);
+        // getCost(row, count, price){
+        //     row.cost = (count * price).toFixed(2);
+        //     return (count * price).toFixed(2);
+        // },
+        // selectionRow(selection, row){
+        //     let selected = selection.length && selection.indexOf(row) !== -1;
+        //     if(selected){
+        //         this.sum += parseFloat(this.getCost(row.num, row.price));
+        //     }else {
+        //         this.sum = 0.00;
+        //     }
+        // },
+        handleSelectionChange(val){
+            this.selectionProduct = val;
+            // var ids = [];
+            // this.selNum = val.length;
+            // for(var index in val) {
+            //     ids.push(val[index].id);
+            // }
+            // for(var i in this.productInCart){
+            //     if(ids.indexOf(thsi.productInCart[i].id) != -1){
+            //         this.productInCart[i].selected = 1;
+            //     }else {
+            //         this.productInCart[i].selected = 0;
+            //     }
+            // }
         },
-        selectionRow(selection, row){
-            let selected = selection.length && selection.indexOf(row) !== -1;
-            if(selected){
-                this.sum += parseFloat(this.getCost(row.num, row.price));
-            }else {
-                this.sum = 0.00;
+        submitCart(){
+            for(var i = 0; i < this.selectionProduct.length; i++){
+                console.log(this.selectionProduct[i]);
+                this.$router.push({
+                    name: 'orderConfirm',
+                    params: {productPass: this.selectionProduct[i]}
+                })
+                //this.productInCart.splice(this.selectionProduct[i].index, 1);
             }
+            // this.$alert('结算成功，请到订单列表查看详情！', '支付成功', {
+            //     confirmButtonText: '确定'
+            // });
+            // setTimeout(() => {
+            //     for(var i = 0; i < this.selectionProduct.length; i++){
+            //         this.$router.push({
+            //             name: 'orderConfirm',
+            //             params: {dataPass: this.selectionProduct[i].index}
+            //         })
+            //         this.productInCart.splice(this.selectionProduct[i].index, 1);
+            //     }
+                
+            // }, 2000)
+            
         }
     }
 }
