@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="cart-main">
-                <el-table ref="cartTable" :data="productInCart" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" empty-text="购物车空空如也~">
+                <el-table ref="cartTable" :data="productInCart" :v-model="productInCart" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" empty-text="购物车空空如也~">
                     <el-table-column type="selection" width="70">
                     </el-table-column>
                     <el-table-column label="商品信息" width="100">
@@ -44,7 +44,7 @@
                     </el-table-column>
                     <el-table-column label="金额" width="170">
                         <template slot-scope="scope">
-                            <span style="color: red;">￥ {{(scope.row.price * scope.row.count).toFixed(2)}}</span>
+                            <span style="color: red;">￥ {{scope.row.cost}}</span>
                             <!-- <span style="color: red;">￥{{getCost(scope.$row, scope.row.count, scope.row.price)}}</span> -->
                         </template>
                     </el-table-column>
@@ -147,6 +147,7 @@ export default{
             this.$router.push({
                 name: 'orderConfirm',
                 params: {productPass: this.selectionProduct}
+                
             })
             // this.$alert('结算成功，请到订单列表查看详情！', '支付成功', {
             //     confirmButtonText: '确定'

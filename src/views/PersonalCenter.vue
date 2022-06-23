@@ -20,6 +20,7 @@
                         </el-submenu>
                         <el-submenu index="2" style="background-color: #c3d1e3">
                             <template slot="title"><i class="el-icon-menu"></i>我的钱包</template>
+                            <el-menu-item index="/balance">余额</el-menu-item>
                             <el-menu-item index="/rechargeRecord">充值记录</el-menu-item>
                             <el-menu-item index="/paymentRecord">支付记录</el-menu-item>
                         </el-submenu>

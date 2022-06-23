@@ -66,6 +66,11 @@ const routes = [
                 component: () => import('../views/user/UserInfo.vue')
             },
             {
+                path: '/balance',
+                name: 'balance',
+                component: () => import('../views/user/Balance.vue')
+            },
+            {
                 path: '/rechargeRecord',
                 name: 'rechargeRecord',
                 component: () => import('../views/user/RechargeRecord.vue')
@@ -103,7 +108,7 @@ const routes = [
             {
                 path: '/orderConfirm',
                 name: 'orderConfirm',
-                component: () => import('../views/user/OrderConfirm.vue')
+                component: () => import('../views/user/orderConfirm.vue')
             }
         ]
     },
