@@ -65,20 +65,26 @@ export default{
             num: 1,
             search: '',
             id: null,
+            sku: null,
         }
     },
     mounted(){
         this.getProduct();
     },
     methods: {
+        // getProduct(){
+        //     this.dataLoading = true;
+        //     import('@/mock/product.json').then((res) => {
+        //         this.attributes = res.data;
+        //         this.dataLoading = false;
+        //         this.id = parseInt(this.attributes.id);
+        //     });
+        // },
         getProduct(){
-            this.dataLoading = true;
-            import('@/mock/product.json').then((res) => {
-                this.attributes = res.data;
-                this.dataLoading = false;
-                this.id = parseInt(this.attributes.id);
-            });
-        },
+            let _this = this;
+            _this.sku = this.$route.params.sku;
+            
+        }
     }
 
 }

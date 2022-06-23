@@ -10,6 +10,17 @@
                         
                     </div>
                 </div>
+                <div class="case">
+                    <product-showcase class="pr" v-for="item in list" :p="item" :key="item.sku"></product-showcase>
+                </div>
+                <!-- <el-row>
+                    <el-col class="showcase" :span="5">
+                        <div class="case">
+                            <product-showcase v-for="item in list" :p="item" :key="item.id"></product-showcase>
+                        </div>
+                    </el-col>
+                </el-row> -->
+                <!-- <product-showcase v-for="item in list" :p="item" :key="item.id"></product-showcase> -->
             </el-main>
         </el-container>
     </div>
@@ -17,12 +28,13 @@
 
 <script>
 import Top from './page/top.vue'
+import ProductShowcase from './ProductShowcase.vue'
 export default {
-  components: { Top },
+  components: { Top, ProductShowcase },
     name: 'searchRes',
     data() {
         return {
-
+            list: [],
         }
     },
     mounted(){
@@ -48,28 +60,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list-control .list-order{
-    background: #F8F8FF;
-    border-radius: 6px;
-    margin: 16px;
-    padding: 16px;
-    box-shadow: 0px 1.3px 1.3px blanchedalmond;
+.case{
+    margin-left: -10px;
+
 }
-.list-order-item{
-    cursor: pointer;
-    display: inline-block;
-    border: 1px solid #e9eaec;
-    border-radius: 4px;
-    margin-right: 6px;
-    padding: 2px 6px;
-}
-.list-order-item.on{
-    background: orangered;
-    border: 1px solid orangered;
-    color: white;
-}
-.product-not-found{
-    text-align: center;
-    padding: 32px;
+.pr{
+    width: 25%;
+    float: left;
+    padding-left: 13px;
+    box-sizing: border-box;
+    margin-bottom: 50px;
 }
 </style>
