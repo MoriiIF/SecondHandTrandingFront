@@ -22,17 +22,17 @@
                 </span>
             </div>
         </div>
-        <pruduct-showcase v-for="item in filteredAndOrderedList" :info="item" :key="item.id"></pruduct-showcase>
+        <pruduct-details v-for="item in filteredAndOrderedList" :info="item" :key="item.id"></pruduct-details>
         <div class="product-not-found" v-show="!filteredAndOrderedList.length">暂无相关商品</div>
     </div>
 </template>
 
 <script>
 import Top from './page/top.vue'
-import PruductShowcase from './ProductShowcase.vue'
+import ProductDetails from './ProductDetails.vue'
 export default {
     name: 'search',
-    components: {Top, PruductShowcase},
+    components: {Top, ProductDetails},
     data() {
         return {
             order: ''

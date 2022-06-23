@@ -3,6 +3,7 @@
         <el-row>
             <el-col span="2">
                 <h3>充值记录</h3>
+                <span style="display: inline-block">(账户余额：)</span>
             </el-col>
         </el-row>
         <el-table

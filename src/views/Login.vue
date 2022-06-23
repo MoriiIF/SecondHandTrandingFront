@@ -162,23 +162,23 @@ export default{
         }
       })
     },
-    // toLogin: function() {
-    //   // setTimeout(this.$router.push('/login'), 3000)
-    //   //this.$router.push('/');
-    //   var url = 'http://49.232.81.174:8080/users/login'
-    //   this.$http.get(url, {params: {
-    //     userId: this.loginForm.username,
-    //     password: this.loginForm.password
-    //   }}).then(result => {
-    //     if (result.data['data'] == 'success.') {
-    //       localStorage.setItem('userId', this.loginForm.username)
-    //       this.$router.push('/')
-    //     } else {
-    //       console.log(result.data['data'])
-    //     }
-    //   }
-    //   )
-    // },
+    toLogin: function() {
+      // setTimeout(this.$router.push('/login'), 3000)
+      //this.$router.push('/');
+      var url = 'http://49.232.81.174:8080/users/login'
+      this.$http.get(url, {params: {
+        userId: this.loginForm.username,
+        password: this.loginForm.password
+      }}).then(result => {
+        if (result.data['data'] == 'success.') {
+          localStorage.setItem('userId', this.loginForm.username)
+          this.$router.push('/')
+        } else {
+          console.log(result.data['data'])
+        }
+      }
+      )
+    },
     point(){
       const point = Cookies.get('point') !== undefined
       if(point){

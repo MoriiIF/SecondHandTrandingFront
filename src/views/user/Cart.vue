@@ -69,7 +69,16 @@ export default{
         }
     },
     mounted(){
-        this.getProduct();
+        // this.getProduct();
+        var url = 'http://49.232.81.174:8080/cart/getCartList'
+        this.axios.get(url, {params: {
+                userId: localStorage.getItem('userId')
+            }}).then(res => {
+            if(res.data['message'] == '操作成功'){
+                this.productInCart = res.data['data']['cartProducts']
+                console.log(this.productInCart)
+            }
+        })
     },
     computed: {
         sum(){
@@ -84,12 +93,24 @@ export default{
         
     },
     methods: {
-        getProduct(){
-            this.dataLoading = true;
-            import('@/mock/product.json').then((res) => {
-                this.productInCart = res.data;
-                this.dataLoading = false;
-            });
+        // getProduct(){
+        //     this.dataLoading = true;
+        //     import('@/mock/product.json').then((res) => {
+        //         this.productInCart = res.data;
+        //         this.dataLoading = false;
+        //     });
+        // },
+        getPro(){
+            var url = 'http://49.232.81.174:8080/cart/getCartList'
+            this.axios.get(url, {params: {
+                userId: localStorage.getItem('userId')
+            }}).then(res => {
+                if(res.data['message'] == '操作成功'){
+
+                    this.productInCart = res.data['data']['cartProducts']
+                    this.reload()
+                }
+            })
         },
         deleteOne(index, rows){
             rows.splice(index, 1);

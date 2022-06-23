@@ -103,7 +103,7 @@ const routes = [
             {
                 path: '/orderConfirm',
                 name: 'orderConfirm',
-                component: () => import('../views/user/orderConfirm.vue')
+                component: () => import('../views/user/OrderConfirm.vue')
             }
         ]
     },
