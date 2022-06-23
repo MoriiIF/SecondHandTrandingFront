@@ -122,14 +122,11 @@ export default{
             // }
         },
         submitCart(){
-            for(var i = 0; i < this.selectionProduct.length; i++){
-                console.log(this.selectionProduct[i]);
-                this.$router.push({
-                    name: 'orderConfirm',
-                    params: {productPass: this.selectionProduct[i]}
-                })
-                //this.productInCart.splice(this.selectionProduct[i].index, 1);
-            }
+            console.log(this.selectionProduct);
+            this.$router.push({
+                name: 'orderConfirm',
+                params: {productPass: this.selectionProduct}
+            })
             // this.$alert('结算成功，请到订单列表查看详情！', '支付成功', {
             //     confirmButtonText: '确定'
             // });
