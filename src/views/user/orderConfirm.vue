@@ -70,9 +70,6 @@ export default {
         }
     },
     computed: {
-        realPay(tableName){
-            var cost = 0;
-        }
     },
     created(){
         this.getOrder();
@@ -81,6 +78,7 @@ export default {
         getOrder(){
             let _this = this;
             _this.productInOrder = this.$route.params.productPass;
+            console.log(this.productInOrder)
         },
         // getTotal(param){
         //     const {columns, data} = param;

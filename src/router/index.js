@@ -10,6 +10,7 @@ import PersonalCenter from '../views/PersonalCenter.vue'
 import Merchant from '../views/Merchant.vue'
 import SearchResult from '../views/SearchResult.vue'
 import ProductShowcase from '../views/ProductShowcase.vue'
+import SearchRes from '../views/SearchRes.vue'
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,11 @@ const routes = [
         path: '/searchResult',
         name: 'searchResult',
         component: SearchResult
+    },
+    {
+        path: '/searchRes',
+        name: 'searchRes',
+        component: SearchRes
     },
     {
         path: '/product/:id',
