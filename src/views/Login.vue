@@ -153,6 +153,7 @@ export default{
           'password': _this.loginForm.password
         }
       }).then(function(res){
+        console.log(res)
         if(res.data.data == 'success.'){
           localStorage.setItem('userId', _this.loginForm.username);
           _this.loginForm.username = res.data.data.userId;

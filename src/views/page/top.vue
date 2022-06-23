@@ -3,7 +3,7 @@
             <el-header style="background: #3e3e3e; font-size: 14px; height: 30px">
                 <div style="width: 60%; height: 30px; margin: 0 auto; display: flex;">
                     <div style="text-align: left; display: flex; flex: 1;">
-                        <div class="active">校园二手交易平台</div>
+                        <div class="active" @click="goHome">校园二手交易平台</div>
                     </div>
                     <div v-if="userId" style="width: 258px; text-align: right; display: flex;">
                         <div class="active" @click="goCenter">{{userId}}</div>
@@ -39,11 +39,19 @@ export default{
             this.$router.replace('/register')
         },
         goCenter(){
-            this.$router.push('/personalCenter')
+            if (this.userId == "admin") {
+                this.$router.push('/adminCenter')
+            } else {
+                this.$router.push('/personalCenter')
+            }
+            
         },
         logOut() {
             localStorage.setItem('userId', '')
             this.$router.push('/login')
+        },
+        goHome() {
+            this.$router.push('/')
         }
     }
 }
