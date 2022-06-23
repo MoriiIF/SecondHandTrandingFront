@@ -8,7 +8,7 @@
                 <div class="attribute" style="display: flex;">
                     <div class="details-img" style="flex: 1; min-width: 0">
                         <div class="pro-img">
-                            <img :src="attributes.productImg" alt="" width="350px" height="350px">
+                            <img :src="attributes.picture" alt="" width="350px" height="350px">
                         </div>
                     </div>
                     <div class="details-text" style="flex: 1; min-width: 0">
@@ -61,7 +61,7 @@ export default{
     components: {Top},
     data(){
         return {
-            attributes: [],
+            attributes: null,
             num: 1,
             search: '',
             id: null,
@@ -83,7 +83,14 @@ export default{
         getProduct(){
             let _this = this;
             _this.sku = this.$route.params.sku;
-            
+            var url = "http://49.232.81.174:8080/commodity/listAll"
+            this.axios.get(url).then(result => {
+                if (result.data['message'] == '操作成功' && (item => item.sku === _this.sku)) {
+                    this.attributes = result.data['data']
+                    this.reload()
+                }
+            })
+
         }
     }
 
