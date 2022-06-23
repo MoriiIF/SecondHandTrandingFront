@@ -152,6 +152,7 @@
 
 <script>
 import axios from 'axios';
+import { result } from 'lodash';
 import SIdentify from '../components/identify.vue';
 export default{
     name: 'regiSter',
@@ -371,12 +372,9 @@ export default{
             "type": this.ruleForm.type_radio,
             "admin": false
             };
-            _this.$http.post(url, _this.$qs.stringify(postData))
-                       .then(function(res){
-                        if(res.data.code == 200){
-
-                        }
-                       })
+            _this.$http.post(url,postData,{ emulateJSON: true }).then(result => {
+                console.log(result)
+            })
 
         },
 

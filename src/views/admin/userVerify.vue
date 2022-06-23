@@ -33,6 +33,7 @@
 import axios from 'axios'
 
   export default {
+    inject: ['reload'],
     methods: {
       userVerify(row, result) {
           var url="http://49.232.81.174:8080/admin/userVerify"
