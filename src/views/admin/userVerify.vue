@@ -45,7 +45,7 @@ import axios from 'axios'
         }).then(function(response) {
             console.log(response)
             if (response.data['message'] == '操作成功') {
-                this.reload()
+                location.reload()
             }
         }).catch(function(error) {
             console.log(error)
