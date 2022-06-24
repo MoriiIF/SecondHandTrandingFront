@@ -10,11 +10,11 @@
                     <strong class="totalPrice">
                         <span class="total">￥ {{sum}}</span>
                     </strong>
-                    <el-button class="submit-btn" :disabled="selectionProduct == 0 ? true: false" @click="submitCart">结 算</el-button>
+                    <el-button class="submit-btn" :disabled="selectionProduct == 0 ? true: false" @click="submitCart()">结 算</el-button>
                 </div>
             </div>
             <div class="cart-main">
-                <el-table ref="cartTable" :data="productInCart" :v-model="productInCart" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" empty-text="购物车空空如也~">
+                <el-table ref="cartTable" :data="productInCart" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange" empty-text="购物车空空如也~">
                     <el-table-column type="selection" width="70">
                     </el-table-column>
                     <el-table-column label="商品信息" width="100">
@@ -44,13 +44,13 @@
                     </el-table-column>
                     <el-table-column label="金额" width="170">
                         <template slot-scope="scope">
-                            <span style="color: red;">￥ {{scope.row.cost}}</span>
+                            <span style="color: red;">￥ {{(scope.row.price * scope.row.count).toFixed(2)}}</span>
                             <!-- <span style="color: red;">￥{{getCost(scope.$row, scope.row.count, scope.row.price)}}</span> -->
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" width="150">
                         <template slot-scope="scope">
-                            <el-button type="text" @click.native.prevent="deleteOne(scope.$index, productInCart)">删 除</el-button>
+                            <el-button type="text" @click.native.prevent="deleteProduct(scope.$index, productInCart)">删 除</el-button>
                         </template>
                     </el-table-column>
                 </el-table>
@@ -69,16 +69,16 @@ export default{
         }
     },
     mounted(){
-        // this.getProduct();
-        var url = 'http://49.232.81.174:8080/cart/getCartList'
-        this.axios.get(url, {params: {
-                userId: localStorage.getItem('userId')
-            }}).then(res => {
-            if(res.data['message'] == '操作成功'){
-                this.productInCart = res.data['data']['cartProducts']
-                console.log(this.productInCart)
-            }
-        })
+        this.getProduct();
+        // var url = 'http://49.232.81.174:8080/cart/getCartList'
+        // this.axios.get(url, {params: {
+        //         userId: localStorage.getItem('userId')
+        //     }}).then(res => {
+        //     if(res.data['message'] == '操作成功'){
+        //         this.productInCart = res.data['data']['cartProducts']
+        //         console.log(this.productInCart)
+        //     }
+        // })
     },
     computed: {
         sum(){
@@ -100,7 +100,7 @@ export default{
         //         this.dataLoading = false;
         //     });
         // },
-        getPro(){
+        getProduct(){
             var url = 'http://49.232.81.174:8080/cart/getCartList'
             this.axios.get(url, {params: {
                 userId: localStorage.getItem('userId')
@@ -109,6 +109,23 @@ export default{
 
                     this.productInCart = res.data['data']['cartProducts']
                     this.reload()
+                }
+            })
+        },
+        addedProduct(){
+            let _this = this;
+            _this.productInCart = this.$route.params.addP;
+        },
+        deleteProduct(index, rows){
+            var url = 'http://49.232.81.174:8080/cart/deleteCart'
+            this.axios.get(url, {
+                params: {
+                    userId: localStorage.getItem('userId'),
+                    sku: this.sku
+                }
+            }).then(res => {
+                if(res.data['message'] == '操作成功'){
+                    rows.splice(index, 1)
                 }
             })
         },
@@ -144,11 +161,29 @@ export default{
         },
         submitCart(){
             console.log(this.selectionProduct);
+            // Object.keys(this.selectionProduct).forEach((item) => {
+            //     this.$router.push({
+            //         name: 'orderConfirm',
+            //         params: {productPass: item}
+            //     })
+            // })
+            // this.selectionProduct.forEach(item => {
+            //     this.$router.push({
+            //         name: 'orderConfirm',
+            //         params: {productPass: item}
+            //     })
+            // })
             this.$router.push({
                 name: 'orderConfirm',
                 params: {productPass: this.selectionProduct}
-                
             })
+            // for(var i = 0; i < this.selectionProduct.length; i++){
+            //     this.$router.push({
+            //         name: 'orderConfirm',
+            //         params: {ProductPass: this.selectionProduct[i].index}
+            //     })
+            //     //this.productInCart.splice(this.selectionProduct[i].index, 1);
+            // }
             // this.$alert('结算成功，请到订单列表查看详情！', '支付成功', {
             //     confirmButtonText: '确定'
             // });
@@ -160,7 +195,6 @@ export default{
             //         })
             //         this.productInCart.splice(this.selectionProduct[i].index, 1);
             //     }
-                
             // }, 2000)
             
         }

@@ -4,6 +4,7 @@
             <el-col span="2">
                 <h3>账户余额</h3>
                 <span style="display: inline-block">金额{{money}}</span>
+                <br>
                 <span style="display: inline-block">积分{{point}}</span>
             </el-col>
         </el-row>

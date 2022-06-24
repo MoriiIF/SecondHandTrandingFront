@@ -15,15 +15,15 @@
                 <h4 class="header-title">确认订单信息</h4>
             </div>
             <div class="order-content">
-                <el-table ref="orderTable" :v-model="this.productInOrder" :data="this.productInOrder" tooltip-effect="dark" style="width: 100%" >
+                <el-table ref="orderTable" :data="productInOrder" tooltip-effect="dark" style="width: 100%" >
                     <el-table-column label="商品" width="100">
                         <template slot-scope="scope">
                             <img :src="scope.row.productImg" alt="" width="80px" height="80px">
                         </template>
                     </el-table-column>
-                    <el-table-column width="300">
+                    <el-table-column v-model="productInOrder.name" width="300">
                         <template slot-scope="scope">  
-                            <span style="overflow: hidden;">{{scope.row.name}}</span>
+                            <span  style="overflow: hidden;">{{scope.row.name}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column label="店铺" width="120">
@@ -55,6 +55,18 @@
                     <span class="pay-price">￥ {{}}</span>
                 </div>
             </div> -->
+            <div class="submit-order">
+                <div class="wrapper">
+                    <!-- <el-button class="go-back" type="text">返回购物车</el-button> -->
+                    <el-button class="go-submit" @click="dialogVisible = true">提 交 订 单</el-button>
+                </div>
+            </div>
+            <el-dialog title="支付成功" :visible.sync="dialogVisible" width="30%">
+                <span>请到订单列表查看详情吧！</span>
+                <span slot="footer" class="dialog-footer">
+                    <el-button type="primary" @click="(dialogVisible = false) && (submitOrder)">确 定</el-button>
+                </span>
+            </el-dialog>
         </div>
     </div>
 </template>
@@ -66,7 +78,8 @@ export default {
         return {
             radio: 1,
             addressList: ['地址一', '地址二', '地址三'],
-            productInOrder:{},
+            productInOrder:[],
+            dialogVisible: false,
         }
     },
     computed: {
@@ -91,7 +104,16 @@ export default {
         //         const values = data.map(item => Number(item[colum.property]));
         //         //if()
         //     })
-        // }
+        // },
+        submitOrder(){
+            this.$router.push({
+                name: 'shoppingRecord',
+                params: {products: this.productInOrder}
+            })
+            // this.$alert('请到订单列表查看详情吧！', '支付成功',{
+            //     confirmButtonText: '确定'
+            // });
+        }
     }
 }
 </script>
@@ -152,5 +174,33 @@ export default {
 .pay-price{
     color: orangered;
     font: 700 26px;
+}
+.submit-order{
+    text-align: right;
+    margin-top: -1px;
+}
+.wrapper{
+    display: inline-block;
+    padding: 0 0 5px 5px;
+}
+.go-back{
+    color: #36c;
+    text-decoration: none;
+    margin-right: 50px;
+    line-height: 34px;
+}
+.go-submit{
+    display: inline-block;
+    width: 130px;
+    height: 39px;
+    position: relative;
+    vertical-align: middle;
+    line-height: 17px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    background: orangered;
+    color: white;
 }
 </style>

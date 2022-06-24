@@ -44,7 +44,7 @@
                             </dl>
                             <div class="btn">
                                 <el-button type="danger" plain>立即购买</el-button>
-                                <el-button type="danger">加入购物车</el-button>
+                                <el-button type="danger" @click="addProduct">加入购物车</el-button>
                             </div>
                             
                         </div>
@@ -81,16 +81,37 @@ export default{
         //     });
         // },
         getProduct(){
-            let _this = this;
-            _this.sku = this.$route.params.sku;
-            var url = "http://49.232.81.174:8080/commodity/listAll"
-            this.axios.get(url).then(result => {
-                if (result.data['message'] == '操作成功' && (item => item.sku === _this.sku)) {
+            this.sku = this.$route.params.id;
+            console.log(this.sku)
+            var url = "http://49.232.81.174:8080/commodity/getCommodityBySku"
+            this.axios.get(url, {
+                params: {
+                    'sku': this.sku
+                }
+            }).then(result => {
+                if (result.data['message'] == '操作成功') {
                     this.attributes = result.data['data']
+                    console.log(this.attributes)
                     this.reload()
                 }
             })
 
+        },
+        addProduct(){
+            var url = "http://49.232.81.174:8080/cart/addCart"
+            this.axios.get(url, {
+                params: {
+                    'userId': localStorage.getItem('userId'),
+                    'sku': this.sku
+                }
+            }).then(result => {
+                if(result.data['message'] == '操作成功'){
+                    this.$router.push({
+                        name: 'cart',
+                        params: {addP: this.attributes}
+                    })
+                }
+            })
         }
     }
 
