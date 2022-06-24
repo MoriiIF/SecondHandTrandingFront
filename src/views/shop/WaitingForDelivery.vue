@@ -8,7 +8,7 @@
                     <span>{{scope.row.name}}</span>
                 </template>
             </el-table-column>
-            <el-table-column label="买家" width="100">
+            <el-table-column label="买家" width="200">
                 <template slot-scope="scope">
                     <span>{{scope.row.id}}</span>
                 </template>
@@ -18,18 +18,11 @@
                     <span>{{scope.row.tradingStatus}}</span>
                 </template>
             </el-table-column> -->
-            <!-- 下面的我刚刚还在写 -->
-            <el-table-column label="操作" width="130">
-                <template>
-                    <el-button size="small" @click="confirmSend(scope.row)">确定发货</el-button>
+            <el-table-column label="操作" width="400">
+                <template slot-scope="scope">
+                    <el-button size="small" @click="confirmSend(scope.row, 2)">确定发货</el-button>
+                    <el-button size="small" type="danger" @click="confirmSend(scope.row, 0)">拒绝发货</el-button>
                 </template>
-            </el-table-column>
-            
-            <el-table-column label="操作" width="150">
-                <el-button size="small" v-if="btnAgree" @click="agree">同意</el-button>
-                <el-button size="small" type="danger" v-if="btnRefuse" @click="dialogVisible = true">拒绝</el-button>
-                <span v-if="waiting">已同意，等待买家处理</span>
-                <span v-if="reject">已驳回申请</span>
             </el-table-column>
         </el-table>
     </div>
@@ -60,12 +53,13 @@ export default {
                 }
             })
         },
-        confirmSend(row){
+        confirmSend(row, result){
+            console.log(row)
             var url = 'http://49.232.81.174:8080/commodity/setOrderList'
             this.axios.get(url, {
                 params: {
                     orderId: row.orderId,
-                    status: 2
+                    status: result
                 }
             }).then(res => {
                 if(res.data['message'] == "操作成功"){
