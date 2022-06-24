@@ -15,14 +15,14 @@
                 <h4 class="header-title">确认订单信息</h4>
             </div>
             <div class="order-content">
-                <el-table ref="orderTable" :v-model="productInOrder" :data="productInOrder" tooltip-effect="dark" style="width: 100%" >
+                <el-table ref="orderTable" :v-model="this.productInOrder" :data="this.productInOrder" tooltip-effect="dark" style="width: 100%" >
                     <el-table-column label="商品" width="100">
                         <template slot-scope="scope">
                             <img :src="scope.row.productImg" alt="" width="80px" height="80px">
                         </template>
                     </el-table-column>
                     <el-table-column width="300">
-                        <template slot-scope="scope">
+                        <template slot-scope="scope">  
                             <span style="overflow: hidden;">{{scope.row.name}}</span>
                         </template>
                     </el-table-column>
@@ -66,7 +66,7 @@ export default {
         return {
             radio: 1,
             addressList: ['地址一', '地址二', '地址三'],
-            productInOrder:[],
+            productInOrder:{},
         }
     },
     computed: {
