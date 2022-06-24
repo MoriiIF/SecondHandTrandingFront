@@ -42,7 +42,7 @@ export default{
                 console.log(result)
                 if(result.data['message'] == '操作成功') {
                     this.money = result.data['data']['balance']
-                    this.point = result.data['data']['point']
+                    this.point = result.data['data']['point'] 
                 }
             })
         },
