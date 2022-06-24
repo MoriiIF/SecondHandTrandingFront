@@ -219,19 +219,26 @@ export default{
             console.log(tab, event);
         },
         searchBtn(){
-            let s = this.search
-            let searchVal = ""
+            var s = this.search
             if(s == ""){
                 return;
             }else {
                 var url = 'http://49.232.81.174:8080/commodity/searchByName'
                 this.axios.get(url,{
                     params: {
-                        name: s
+                        name: s,
+                        sort: 0,
                     }
                 }).then(res => {
-                    if((res.data['message'] == "操作成功") && (res.data['data']['name'] == s)){
-                        this.$router.push({path: '/searchRes'})
+                    if(res.data['message'] == "操作成功"){
+                        console.log(res.data)
+                        this.$router.push({
+                            path: '/searchRes',
+                            query: {
+                                search: this.search,
+                                params: res.data['data']
+                            }
+                        })
                     }
                 })
             }

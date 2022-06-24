@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="case">
-                    <product-showcase class="pr" v-for="item in list" :p="item" :key="item.sku"></product-showcase>
+                    <product-showcase class="pr" v-for="item in searchResult" :p="item" :key="item.sku"></product-showcase>
                 </div>
             </el-main>
         </el-container>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import convertShapeToPath from 'vue-svg-icon/lib/convertShapeToPath'
 import Top from './page/top.vue'
 import ProductShowcase from './ProductShowcase.vue'
 export default {
@@ -27,7 +28,15 @@ export default {
     data() {
         return {
             list: [],
+            searchResult: [],
+            keyword: '',
         }
+    },
+    created() {
+        this.searchResult = this.$route.query.params
+        this.keyword = this.$route.query.search
+        console.log(this.searchResult)
+        console.log(this.keyword)
     },
     mounted(){
         // var url = "http://49.232.81.174:8080/commodity/listAll"
