@@ -46,8 +46,6 @@
                 </template>
             </el-table-column>
         </el-table>
-
-
         <el-dialog title="请填写驳回申请的理由" :visible.sync="dialogVisible">
             <el-input type="textarea" :rows="5" placeholder="请输入驳回理由" v-model="reason">
             </el-input>
@@ -60,17 +58,14 @@
 </template>
 
 <script>
-export default{
+export default {
     name: 'returnRequest',
-    data(){
-        return{
+    data() {
+        return {
             tableData: [],
             btnAgree: true,
             btnRefuse: true,
             waiting: false,
-            reject: false,
-            reason: '',
-            dialogVisible: false,
         }
     },
     created() {
@@ -89,7 +84,7 @@ export default{
                 }
             }).then(res => {
                 if(res.data['message'] == "操作成功"){
-                    console.log(res.data['data'])
+                    location.reload()
                 }
             })
         },
@@ -106,7 +101,7 @@ export default{
                 }
             }).then(res => {
                 if(res.data['message'] == "操作成功"){
-                    console.log(res.data['data'])
+                    location.reload()
                 }
             })
         },
@@ -115,47 +110,30 @@ export default{
             this.axios.get(url, {
                 params: {
                     shop: localStorage.getItem('userId'),
-                    status: 4
+                    status: 3
                 }
             }).then(res => {
                 if(res.data['message'] == "操作成功"){
                     this.tableData = res.data['data']
                 }
             })
+        },
+        setOrderList(){
+            var url = 'http://49.232.81.174:8080/commodity/setOrderList'
+            this.axios.get(url, {
+                params: {
+                    orderId: this.orderId,
+                    status: 3
+                }
+            }).then(res => {
+                if(res.data['message'] == "操作成功"){
+                    this.$router.push({
+                        name: 'shipped',
+                        params: {proShipped: this.productInOrder}
+                    })
+                }
+            })
         }
     }
 }
-
-//         {
-//             "orderId": "3fd24bc19fa44d3ba142c9112b1a0c2b",
-//             "id": "789456",
-//             "sku": "c15deba7193c4dee9fcbaa5d1990fc2c",
-//             "count": 1,
-//             "price": 1,
-//             "payment": 0,
-//             "purchaseTime": "2022-06-24T00:00:00.000+00:00",
-//             "status": 1,
-//             "shop": "789456",
-//             "picture": "http://49.232.81.174:8080/pic/2207b049486348a9b28e71c7be1ef1d5.jpg"
-//         }
-//     ],
-//     "timestamp": 1656095501932
-// }
-
-// 你会通过this.param = res.data['data']来获取到的是
-// [
-//         {
-//             "orderId": "3fd24bc19fa44d3ba142c9112b1a0c2b",
-//             "id": "789456",
-//             "sku": "c15deba7193c4dee9fcbaa5d1990fc2c",
-//             "count": 1,
-//             "price": 1,
-//             "payment": 0,
-//             "purchaseTime": "2022-06-24T00:00:00.000+00:00",
-//             "status": 1,
-//             "shop": "789456",
-//             "picture": "http://49.232.81.174:8080/pic/2207b049486348a9b28e71c7be1ef1d5.jpg"
-//         }
-//     ]
-
-//     比如你要用到订单号 一定注意键值对对应 param['orderId']也可以param.orderId <-这个应该可以 我忘记了
+</script>
