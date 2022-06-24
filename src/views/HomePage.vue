@@ -236,7 +236,8 @@ export default{
                             path: '/searchRes',
                             query: {
                                 search: this.search,
-                                params: res.data['data']
+                                params: res.data['data'],
+                                sort: 0
                             }
                         })
                     }

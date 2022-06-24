@@ -16,7 +16,8 @@
                         <el-submenu index="1" style="background-color: #c3d1e3">
                             <template slot="title"><i class="el-icon-message"></i>平台审核</template>
                             <!-- <router-link class="el-menu-item index='1-1'" active-class="active" to="/userInfo">个人信息</router-link> -->
-                            <el-menu-item index="/userVerify">新用户审核</el-menu-item></el-menu-item>
+                            <el-menu-item index="/userVerify">新用户审核</el-menu-item>
+                            <el-menu-item index="/commodityVerify">商品上架审核</el-menu-item>
                         </el-submenu>
                     </el-menu>
                 </el-aside>

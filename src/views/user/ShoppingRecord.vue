@@ -5,8 +5,13 @@
         <el-table :data="tableData" style="width: 100%">
             <el-table-column label="商品" width="300">
                 <template slot-scope="scope">
-                    <img :src="scope.row.productImg" alt="" width="100px" height="100px">
+                    <img :src="scope.row.picture" alt="" width="100px" height="100px">
                     <span>{{scope.row.name}}</span>
+                </template>
+            </el-table-column>
+            <el-table-column label="卖家" width="150">
+                <template slot-scope="scope">
+                    <span>{{scope.row.shop}}</span>
                 </template>
             </el-table-column>
             <el-table-column label="单价" width="100">
@@ -27,7 +32,7 @@
             </el-table-column>
             <el-table-column label="实付款" width="100">
                 <template slot-scope="scope">
-                    <span>￥ {{scope.row.cost}}</span>
+                    <span>￥ {{scope.row.price * scope.row.count}}</span>
                 </template>
             </el-table-column>
             <el-table-column label="交易状态" width="100">
@@ -50,6 +55,7 @@ export default {
     name: 'orderList',
     data(){
         return {
+            userId: localStorage.getItem('userId'),
             tableData: [],
             clickReturn: true,
             flag: false,
@@ -98,8 +104,18 @@ export default {
             this.$router.push('/comment');
         },
         getOrder(){
-            let _this = this;
-            _this.tableData = this.$route.params.products;
+            this.axios.get("http://49.232.81.174:8080/users/purchaseHistory/",{
+               params: {
+                    userId: localStorage.getItem('userId')
+               }
+            }).then(result => {
+                if (result.data['message'] == '操作成功') {
+                    this.tableData = result.data['data']
+                    console.log("this.tableData")
+                    console.log(this.tableData)
+                    console.log(result.data['data'])
+                }
+            })
         }
     }
 }

@@ -64,7 +64,7 @@
             <el-dialog title="支付成功" :visible.sync="dialogVisible" width="30%">
                 <span>请到订单列表查看详情吧！</span>
                 <span slot="footer" class="dialog-footer">
-                    <el-button type="primary" @click="(dialogVisible = false) && (submitOrder)">确 定</el-button>
+                    <el-button type="primary" @click="submitOrder">确 定</el-button>
                 </span>
             </el-dialog>
         </div>
@@ -91,25 +91,60 @@ export default {
         getOrder(){
             let _this = this;
             _this.productInOrder = this.$route.params.productPass;
-            console.log(this.productInOrder)
         },
-        // getTotal(param){
-        //     const {columns, data} = param;
-        //     const sums = [];
-        //     columns.forEach((columns, index) => {
-        //         if(index === 0){
-        //             sums[index] = '实付款';
-        //             return;
-        //         }
-        //         const values = data.map(item => Number(item[colum.property]));
-        //         //if()
-        //     })
-        // },
         submitOrder(){
+            this.dialogVisible = false
+            // var axios = require('axios');
+            // var data = JSON.stringify({
+            //     "id": localStorage.getItem('userId'),
+            //     "sku": this.productInOrder[0].id,
+            //     "price": this.productInOrder[0].price,
+            //     "count": this.productInOrder[0].count,
+            //     "payment": this.productInOrder[0].cost,
+            //     "status": this.productInOrder[0].tradingStatus
+            // });
+
+            // var config = {
+            //     method: 'post',
+            //     url: 'http://49.232.81.174:8080/users/insertHistory',
+            //     headers: { 
+            //         'User-Agent': 'apifox/1.0.0 (https://www.apifox.cn)', 
+            //         'Content-Type': 'application/json'
+            //     },
+            //     data : data
+            //     };
+
+            // axios(config)
+            //   atch(function (error) {
+            //     console.log(error);
+            // });  .then(function (response) {
+            //     console.log(JSON.stringify(response.data));
+            // })
+            console.log("我是废物")
+            console.log(this.productInOrder[0].productImg)
+            for(var i = 0; i < this.productInOrder.length; i++){
+                this.axios.post("http://49.232.81.174:8080/users/insertHistory", {
+                    id: localStorage.getItem('userId'),
+                    sku: this.productInOrder[i].id,
+                    price: this.productInOrder[i].price,
+                    count: this.productInOrder[i].count,
+                    payment: this.productInOrder[i].cost,
+                    status: this.productInOrder[i].tradingStatus,
+                    shop: this.productInOrder[i].shop,
+                    picture: this.productInOrder[i].productImg
+                }).then(function(response) {
+                    console.log(response)
+                }).catch(function(error) {
+                    console.log(error)
+                })
+            }
+            
+
             this.$router.push({
                 name: 'shoppingRecord',
                 params: {products: this.productInOrder}
             })
+            
             // this.$alert('请到订单列表查看详情吧！', '支付成功',{
             //     confirmButtonText: '确定'
             // });

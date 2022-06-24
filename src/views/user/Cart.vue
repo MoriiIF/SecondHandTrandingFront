@@ -10,7 +10,7 @@
                     <strong class="totalPrice">
                         <span class="total">￥ {{sum}}</span>
                     </strong>
-                    <el-button class="submit-btn" :disabled="selectionProduct == 0 ? true: false" @click="submitCart()">结 算</el-button>
+                    <el-button class="submit-btn" :disabled="selectionProduct == 0 ? true: false" @click="submitCart">结 算</el-button>
                 </div>
             </div>
             <div class="cart-main">
@@ -66,19 +66,12 @@ export default{
         return {
             productInCart: [],
             selectionProduct: [],
+            sku: '',
         }
     },
     mounted(){
         this.getProduct();
-        // var url = 'http://49.232.81.174:8080/cart/getCartList'
-        // this.axios.get(url, {params: {
-        //         userId: localStorage.getItem('userId')
-        //     }}).then(res => {
-        //     if(res.data['message'] == '操作成功'){
-        //         this.productInCart = res.data['data']['cartProducts']
-        //         console.log(this.productInCart)
-        //     }
-        // })
+        // this.deleteProduct();
     },
     computed: {
         sum(){
@@ -93,20 +86,13 @@ export default{
         
     },
     methods: {
-        // getProduct(){
-        //     this.dataLoading = true;
-        //     import('@/mock/product.json').then((res) => {
-        //         this.productInCart = res.data;
-        //         this.dataLoading = false;
-        //     });
-        // },
         getProduct(){
             var url = 'http://49.232.81.174:8080/cart/getCartList'
             this.axios.get(url, {params: {
                 userId: localStorage.getItem('userId')
             }}).then(res => {
                 if(res.data['message'] == '操作成功'){
-
+                    console.log(res.data['data']['cartProducts'])
                     this.productInCart = res.data['data']['cartProducts']
                     this.reload()
                 }
@@ -115,17 +101,19 @@ export default{
         addedProduct(){
             let _this = this;
             _this.productInCart = this.$route.params.addP;
+            console.log(this.$route.params.addP)
         },
         deleteProduct(index, rows){
             var url = 'http://49.232.81.174:8080/cart/deleteCart'
             this.axios.get(url, {
                 params: {
                     userId: localStorage.getItem('userId'),
-                    sku: this.sku
+                    sku: rows[0].id
                 }
             }).then(res => {
                 if(res.data['message'] == '操作成功'){
-                    rows.splice(index, 1)
+                    rows.splice(index, 1);
+                    this.reload()
                 }
             })
         },
@@ -146,37 +134,21 @@ export default{
         // },
         handleSelectionChange(val){
             this.selectionProduct = val;
-            // var ids = [];
-            // this.selNum = val.length;
-            // for(var index in val) {
-            //     ids.push(val[index].id);
-            // }
-            // for(var i in this.productInCart){
-            //     if(ids.indexOf(thsi.productInCart[i].id) != -1){
-            //         this.productInCart[i].selected = 1;
-            //     }else {
-            //         this.productInCart[i].selected = 0;
-            //     }
-            // }
+            console.log(this.selectionProduct)
+
         },
         submitCart(){
-            console.log(this.selectionProduct);
-            // Object.keys(this.selectionProduct).forEach((item) => {
-            //     this.$router.push({
-            //         name: 'orderConfirm',
-            //         params: {productPass: item}
-            //     })
-            // })
-            // this.selectionProduct.forEach(item => {
-            //     this.$router.push({
-            //         name: 'orderConfirm',
-            //         params: {productPass: item}
-            //     })
-            // })
+            console.log(this.selectionProduct)
             this.$router.push({
                 name: 'orderConfirm',
                 params: {productPass: this.selectionProduct}
             })
+            // setTimeout(() => {
+            //     for(var i = 0; i < this.selectionProduct.length; i++){
+            //         this.deleteProduct(i, this.selectionProduct)
+            //         this.productInCart.splice(this.selectionProduct[i].index, 1);
+            //     }
+            // }, 2000)
             // for(var i = 0; i < this.selectionProduct.length; i++){
             //     this.$router.push({
             //         name: 'orderConfirm',

@@ -20,20 +20,11 @@
                         </el-submenu>
                         <el-submenu index="2" style="background-color: #c3d1e3">
                             <template slot="title"><i class="el-icon-menu"></i>订单列表</template>
+                            <el-menu-item index="/waitingForDelivery">待发货</el-menu-item>
                             <el-menu-item index="/shipped">已发货</el-menu-item>
                             <el-menu-item index="/received">已收货</el-menu-item>
                             <el-menu-item index="/returnRequest">退货申请</el-menu-item>
                         </el-submenu>
-                        <!-- <el-submenu index="3" style="background-color: #c3d1e3">
-                            <template slot="title"><i class="el-icon-setting"></i>我的交易</template>
-                            <el-menu-item index="/myCart">购物车</el-menu-item>
-                            <el-menu-item index="/shoppingRecord">购买记录</el-menu-item>
-                        </el-submenu>
-                        <el-submenu index="4" style="background-color: #c3d1e3">
-                            <template slot="title"><i class="el-icon-setting"></i>评价管理</template>
-                            <el-menu-item index="/myComments">我评价的</el-menu-item>
-                            <el-menu-item index="/ReceivedComments">评价我的</el-menu-item>
-                        </el-submenu> -->
                     </el-menu>
                 </el-aside>
                 <el-container>

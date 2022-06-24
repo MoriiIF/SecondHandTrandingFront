@@ -52,6 +52,11 @@ const routes = [
                 path: '/userVerify',
                 name: 'userVerify',
                 component: () => import('../views/admin/userVerify.vue')
+            },
+            {
+                path: '/commodityVerify',
+                name: 'commodityVerify',
+                component: () => import('../views/admin/commodityVerify.vue')
             }
         ]
     },
@@ -108,7 +113,7 @@ const routes = [
             {
                 path: '/orderConfirm',
                 name: 'orderConfirm',
-                component: () => import('../views/user/orderConfirm.vue')
+                component: () => import('../views/user/OrderConfirm.vue')
             }
         ]
     },
@@ -141,6 +146,11 @@ const routes = [
                 path: '/received',
                 name: 'received',
                 component: () => import('../views/shop/Received.vue')
+            },
+            {
+                path: '/waitingForDelivery',
+                name: 'waitingForDelivery',
+                component: () => import('../views/shop/WaitingForDelivery')
             }
         ]
     },
