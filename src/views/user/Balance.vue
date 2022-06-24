@@ -3,8 +3,14 @@
         <el-row>
             <el-col span="2">
                 <h3>账户余额</h3>
+<<<<<<< HEAD
+                <span style="display: inline-block">金额{{money}}</span>
+                <br>
+                <span style="display: inline-block">积分{{point}}</span>
+=======
                 <span style="display: inline-block">金额：{{money}}</span>
                 <span style="display: inline-block">积分：{{point}}</span>
+>>>>>>> 4bc22ebaf83037b986df28cb8b30615305c67711
             </el-col>
 
             <el-form  :model="formInline">

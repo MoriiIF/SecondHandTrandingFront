@@ -17,7 +17,7 @@
                         </div>
                         <div style="line-height: 50px;">
                             <el-input placeholder="请输入内容" v-model="search">
-                                <el-button slot="append" icon="el-icon-search"></el-button>
+                                <el-button slot="append" icon="el-icon-search" @click="searchBtn"></el-button>
                             </el-input>
                         </div>
                     </div>
@@ -217,6 +217,24 @@ export default{
         },
         handleClick(tab, event){
             console.log(tab, event);
+        },
+        searchBtn(){
+            let s = this.search
+            let searchVal = ""
+            if(s == ""){
+                return;
+            }else {
+                var url = 'http://49.232.81.174:8080/commodity/searchByName'
+                this.axios.get(url,{
+                    params: {
+                        name: s
+                    }
+                }).then(res => {
+                    if((res.data['message'] == "操作成功") && (res.data['data']['name'] == s)){
+                        this.$router.push({path: '/searchRes'})
+                    }
+                })
+            }
         }
     }
 }

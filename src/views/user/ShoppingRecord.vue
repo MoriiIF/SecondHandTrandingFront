@@ -71,13 +71,13 @@ export default {
         this.getOrder();
     },
     methods: {
-        getOrder(){
-            this.dataLoading = true;
-            import('@/mock/order.json').then((res) => {
-                this.tableData = res.data;
-                this.dataLoading = false;
-            });
-        },
+        // getOrder(){
+        //     this.dataLoading = true;
+        //     import('@/mock/order.json').then((res) => {
+        //         this.tableData = res.data;
+        //         this.dataLoading = false;
+        //     });
+        // },
         applyForReturn(index, row){
             this.$confirm('是否申请退货？', '提示', {
                 confirmButtonText: '确定',
@@ -96,6 +96,10 @@ export default {
         },
         goto(row){
             this.$router.push('/comment');
+        },
+        getOrder(){
+            let _this = this;
+            _this.tableData = this.$route.params.products;
         }
     }
 }

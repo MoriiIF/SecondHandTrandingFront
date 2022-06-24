@@ -7,20 +7,12 @@
             <el-main>
                 <div class="list-control">
                     <div class="list-order">
-                        
+                        <span>排序：</span>
                     </div>
                 </div>
                 <div class="case">
                     <product-showcase class="pr" v-for="item in list" :p="item" :key="item.sku"></product-showcase>
                 </div>
-                <!-- <el-row>
-                    <el-col class="showcase" :span="5">
-                        <div class="case">
-                            <product-showcase v-for="item in list" :p="item" :key="item.id"></product-showcase>
-                        </div>
-                    </el-col>
-                </el-row> -->
-                <!-- <product-showcase v-for="item in list" :p="item" :key="item.id"></product-showcase> -->
             </el-main>
         </el-container>
     </div>
@@ -38,12 +30,13 @@ export default {
         }
     },
     mounted(){
-        var url = "http://49.232.81.174:8080/commodity/listAll"
-        this.axios.get(url).then(result => {
-            if (result.data['message'] == '操作成功') {
-                this.list = result.data['data']
-            }
-        })
+        // var url = "http://49.232.81.174:8080/commodity/listAll"
+        // this.axios.get(url).then(result => {
+        //     if (result.data['message'] == '操作成功') {
+        //         this.list = result.data['data']
+        //     }
+        // })
+        this.getCommodityList()
     },
     methods: {
         getCommodityList() {
