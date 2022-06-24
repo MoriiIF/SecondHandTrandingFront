@@ -3,10 +3,22 @@
         <el-row>
             <el-col span="2">
                 <h3>账户余额</h3>
+<<<<<<< HEAD
                 <span style="display: inline-block">金额{{money}}</span>
                 <br>
                 <span style="display: inline-block">积分{{point}}</span>
+=======
+                <span style="display: inline-block">金额：{{money}}</span>
+                <span style="display: inline-block">积分：{{point}}</span>
+>>>>>>> 4bc22ebaf83037b986df28cb8b30615305c67711
             </el-col>
+
+            <el-form  :model="formInline">
+            <el-form-item  label="">
+                <el-input v-model="formInline.money" placeholder="请输入充值金额"></el-input>
+                <el-button @click="rechargeBalance">充值金额</el-button>
+            </el-form-item>
+            </el-form>
         </el-row>
     
     </div>
@@ -18,7 +30,10 @@ export default{
         return {
             userId: '',
             money: '',
-            point: ''
+            point: '',
+            formInline: {
+                money: ''
+            }
         }
     },
     methods: {
@@ -34,8 +49,19 @@ export default{
                 if(result.data['message'] == '操作成功') {
                     this.money = result.data['data']['balance']
                     this.point = result.data['data']['point']
-                    console.log(this.money)
-                    console.log(this.point)
+                }
+            })
+        },
+        rechargeBalance() {
+            var url = "http://49.232.81.174:8080/users/rechargeBalance"
+            this.axios.get(url, {
+                params: {
+                    'userId': localStorage.getItem('userId'),
+                    'money': this.formInline.money
+                }
+            }).then(result => {
+                if(result.data['message'] == '操作成功') {
+                    location.reload()
                 }
             })
         }
