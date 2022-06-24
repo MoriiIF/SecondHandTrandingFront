@@ -94,34 +94,6 @@ export default {
         },
         submitOrder(){
             this.dialogVisible = false
-            // var axios = require('axios');
-            // var data = JSON.stringify({
-            //     "id": localStorage.getItem('userId'),
-            //     "sku": this.productInOrder[0].id,
-            //     "price": this.productInOrder[0].price,
-            //     "count": this.productInOrder[0].count,
-            //     "payment": this.productInOrder[0].cost,
-            //     "status": this.productInOrder[0].tradingStatus
-            // });
-
-            // var config = {
-            //     method: 'post',
-            //     url: 'http://49.232.81.174:8080/users/insertHistory',
-            //     headers: { 
-            //         'User-Agent': 'apifox/1.0.0 (https://www.apifox.cn)', 
-            //         'Content-Type': 'application/json'
-            //     },
-            //     data : data
-            //     };
-
-            // axios(config)
-            //   atch(function (error) {
-            //     console.log(error);
-            // });  .then(function (response) {
-            //     console.log(JSON.stringify(response.data));
-            // })
-            console.log("我是废物")
-            console.log(this.productInOrder[0].productImg)
             for(var i = 0; i < this.productInOrder.length; i++){
                 this.axios.post("http://49.232.81.174:8080/users/insertHistory", {
                     id: localStorage.getItem('userId'),
@@ -129,9 +101,9 @@ export default {
                     price: this.productInOrder[i].price,
                     count: this.productInOrder[i].count,
                     payment: this.productInOrder[i].cost,
-                    status: this.productInOrder[i].tradingStatus,
+                    status: 1,
                     shop: this.productInOrder[i].shop,
-                    picture: this.productInOrder[i].productImg
+                    picture: this.productInOrder[i].productImg,
                 }).then(function(response) {
                     console.log(response)
                 }).catch(function(error) {

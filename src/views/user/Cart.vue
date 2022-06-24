@@ -71,7 +71,6 @@ export default{
     },
     mounted(){
         this.getProduct();
-        // this.deleteProduct();
     },
     computed: {
         sum(){
