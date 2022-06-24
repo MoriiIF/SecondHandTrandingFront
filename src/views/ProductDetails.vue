@@ -91,7 +91,7 @@ export default{
             }).then(result => {
                 if (result.data['message'] == '操作成功') {
                     this.attributes = result.data['data']
-                    console.log(this.attributes)
+                    console.log(result.data['data'])
                     this.reload()
                 }
             })

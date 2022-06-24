@@ -92,8 +92,36 @@ export default {
             let _this = this;
             _this.productInOrder = this.$route.params.productPass;
         },
+        
         submitOrder(){
             this.dialogVisible = false
+            // var axios = require('axios');
+            // var data = JSON.stringify({
+            //     "id": localStorage.getItem('userId'),
+            //     "sku": this.productInOrder[0].id,
+            //     "price": this.productInOrder[0].price,
+            //     "count": this.productInOrder[0].count,
+            //     "payment": this.productInOrder[0].cost,
+            //     "status": this.productInOrder[0].tradingStatus
+            // });
+
+            // var config = {
+            //     method: 'post',
+            //     url: 'http://49.232.81.174:8080/users/insertHistory',
+            //     headers: { 
+            //         'User-Agent': 'apifox/1.0.0 (https://www.apifox.cn)', 
+            //         'Content-Type': 'application/json'
+            //     },
+            //     data : data
+            //     };
+
+            // axios(config)
+            //   atch(function (error) {
+            //     console.log(error);
+            // });  .then(function (response) {
+            //     console.log(JSON.stringify(response.data));
+            // })
+
             for(var i = 0; i < this.productInOrder.length; i++){
                 this.axios.post("http://49.232.81.174:8080/users/insertHistory", {
                     id: localStorage.getItem('userId'),
@@ -112,10 +140,16 @@ export default {
             }
             
 
-            this.$router.push({
-                name: 'shoppingRecord',
-                params: {products: this.productInOrder}
-            })
+            this.$router.push(
+                {
+                    name: 'shoppingRecord',
+                    params: {products: this.productInOrder}
+                },
+                {
+                    name: 'waitingForDelivery',
+                    params: {delivery: this.productInOrder}
+                }
+            )
             
             // this.$alert('请到订单列表查看详情吧！', '支付成功',{
             //     confirmButtonText: '确定'

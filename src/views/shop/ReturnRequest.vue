@@ -84,3 +84,48 @@ export default{
 <style lang="scss" scoped>
 
 </style>
+
+
+// //1已下单 2已发货 3已完成 4退货中 5完成退货
+// http://49.232.81.174:8080/commodity/getOrderList 两个参数 shop=localstorage.getItem(‘userId’) status=4 获取退货清单
+
+// http://49.232.81.174:8080/commodity/setOrderList 两个参数 orderId status=5 退货成功 拒绝退货的status=3
+
+// 注意：举个例子 你会拿到这样的数据
+// {
+//     "status": 100,
+//     "message": "操作成功",
+//     "data": [
+//         {
+//             "orderId": "3fd24bc19fa44d3ba142c9112b1a0c2b",
+//             "id": "789456",
+//             "sku": "c15deba7193c4dee9fcbaa5d1990fc2c",
+//             "count": 1,
+//             "price": 1,
+//             "payment": 0,
+//             "purchaseTime": "2022-06-24T00:00:00.000+00:00",
+//             "status": 1,
+//             "shop": "789456",
+//             "picture": "http://49.232.81.174:8080/pic/2207b049486348a9b28e71c7be1ef1d5.jpg"
+//         }
+//     ],
+//     "timestamp": 1656095501932
+// }
+
+// 你会通过this.param = res.data['data']来获取到的是
+// [
+//         {
+//             "orderId": "3fd24bc19fa44d3ba142c9112b1a0c2b",
+//             "id": "789456",
+//             "sku": "c15deba7193c4dee9fcbaa5d1990fc2c",
+//             "count": 1,
+//             "price": 1,
+//             "payment": 0,
+//             "purchaseTime": "2022-06-24T00:00:00.000+00:00",
+//             "status": 1,
+//             "shop": "789456",
+//             "picture": "http://49.232.81.174:8080/pic/2207b049486348a9b28e71c7be1ef1d5.jpg"
+//         }
+//     ]
+
+//     比如你要用到订单号 一定注意键值对对应 param['orderId']也可以param.orderId <-这个应该可以 我忘记了

@@ -41,6 +41,40 @@ export default {
         return {
             tableData: [],
         }
+    },
+    methods: {
+        getOrderList(){
+            var url = 'http://49.232.81.174:8080/commodity/getOrderList'
+            this.axios.get(url, {
+                params: {
+                    shop: this.shop,
+                    status: this.tradingStatus
+                }
+            }).then(res => {
+                if(res.data['message'] == "操作成功"){
+                    this.$router.push({
+                        name: 'shoppingRecord',
+                        params:{products: this.productInOrder}
+                    })
+                }
+            })
+        },
+        setOrderList(){
+            var url = 'http://49.232.81.174:8080/commodity/setOrderList'
+            this.axios.get(url, {
+                params: {
+                    orderId: this.orderId,
+                    status: 2
+                }
+            }).then(res => {
+                if(res.data['message'] == "操作成功"){
+                    this.$router.push({
+                        name: 'shipped',
+                        params: {proShipped: this.productInOrder}
+                    })
+                }
+            })
+        }
     }
 }
 </script>

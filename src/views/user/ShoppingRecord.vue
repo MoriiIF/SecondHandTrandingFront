@@ -112,7 +112,8 @@ export default {
                     this.tableData = result.data['data']
                 }
             })
-        }
+        },
+        
     }
 }
 </script>

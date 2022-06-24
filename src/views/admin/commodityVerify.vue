@@ -36,7 +36,7 @@ import axios from 'axios'
           var url="http://49.232.81.174:8080/admin/commodityVerify"
         axios.get(url, {
             params: {
-                id: row['id'],
+                id: row['commodityId'],
                 result: result
             }
         }).then(function(response) {

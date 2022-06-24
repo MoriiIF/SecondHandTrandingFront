@@ -66,6 +66,7 @@ export default{
                 price: '',
                 stock: '',
                 picture: '',
+                shop: ''
             },
             rules: {
                 name: [
@@ -152,7 +153,7 @@ export default{
         // },
         submitProduct(ruleForm){
             console.log(ruleForm)
-            ruleForm.sku = this.uploadData['sku']
+            ruleForm.shop = localStorage.getItem('userId')
             this.axios.post("http://49.232.81.174:8080/commodity/add", ruleForm).then(function(response) {
                 console.log(response)
             }).catch(function(error) {
