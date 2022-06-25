@@ -9,7 +9,7 @@
                     <template>
                         <div class="header-title">
                             <img width="35px" height="35px" src="../assets/logo.png" style="border-radius: 5px">
-                            <span style="font-weight: bold">二手交易平台</span>
+                            <span style="font-weight: bold">二手商品交易平台</span>
                         </div>
                     </template>
                     <el-menu :default-openeds="['1', '4']" default-active="this.$route.path" router>
@@ -21,26 +21,27 @@
                         <el-submenu index="2" style="background-color: #c3d1e3">
                             <template slot="title"><i class="el-icon-menu"></i>我的钱包</template>
                             <el-menu-item index="/balance">余额</el-menu-item>
-                            <el-menu-item index="/rechargeRecord">充值记录</el-menu-item>
-                            <el-menu-item index="/paymentRecord">支付记录</el-menu-item>
+                            <el-menu-item index="/rechargeRecord">交易记录</el-menu-item>
                         </el-submenu>
                         <el-submenu index="3" style="background-color: #c3d1e3">
                             <template slot="title"><i class="el-icon-setting"></i>我的交易</template>
                             <el-menu-item index="/cart">购物车</el-menu-item>
                             <el-menu-item index="/shoppingRecord">订单列表</el-menu-item>
                         </el-submenu>
-                        <el-submenu index="4" style="background-color: #c3d1e3">
+                        <!-- <el-submenu index="4" style="background-color: #c3d1e3">
                             <template slot="title"><i class="el-icon-setting"></i>评价管理</template>
                             <el-menu-item index="/myComments">我评价的</el-menu-item>
                             <el-menu-item index="/ReceivedComments">评价我的</el-menu-item>
-                        </el-submenu>
+                        </el-submenu> -->
                     </el-menu>
                 </el-aside>
                 <el-container>
                     <el-main>
                         <router-view></router-view>
                     </el-main>
-                    <!-- <el-footer>Footer</el-footer> -->
+                                <el-footer>
+                <Bottom></Bottom>
+            </el-footer>
                 </el-container>
             </el-container>
         </el-container>
@@ -49,8 +50,9 @@
 
 <script>
 import Top from "../views/page/top.vue"
+import Bottom from "../views/page/bottom.vue"
 export default{
-    components: {Top},
+    components: {Top, Bottom},
     data() {
         return{
 

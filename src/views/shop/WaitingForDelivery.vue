@@ -64,6 +64,7 @@ export default {
             }).then(res => {
                 if(res.data['message'] == "操作成功"){
                     console.log(res.data['data'])
+                    location.reload()
                 }
             })
         }

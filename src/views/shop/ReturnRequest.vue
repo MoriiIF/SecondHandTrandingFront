@@ -88,7 +88,7 @@ export default {
                 }
             })
         },
-        refuse(){
+        refuse(row){
             this.btnAgree = false;
             this.btnRefuse = false;
             this.reject = true;
@@ -106,15 +106,17 @@ export default {
             })
         },
         getOrderList(){
+            console.log('进入页面')
             var url = 'http://49.232.81.174:8080/commodity/getOrderList'
             this.axios.get(url, {
                 params: {
                     shop: localStorage.getItem('userId'),
-                    status: 3
+                    status: 4
                 }
             }).then(res => {
                 if(res.data['message'] == "操作成功"){
                     this.tableData = res.data['data']
+                    console.log(this.tableData)
                 }
             })
         },

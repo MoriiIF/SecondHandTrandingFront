@@ -84,45 +84,14 @@
                     style="width: 100%">
                     <el-table-column type="index"></el-table-column>
                     <el-table-column prop="adname" label="收货人" width="100">
-                        <template #default="scope">
-                            <el-input size="medium" v-model="scope.row.adname" v-if="addressEdit[scope.$index]"></el-input>
-                            <span v-else>{{scope.row.adname}}</span>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="adphone" label="联系方式" width="140">
-                        <template #default="scope">
-                            <el-input size="medium" v-model="scope.row.adphone" v-if="addressEdit[scope.$index]"></el-input>
-                            <span v-else>{{scope.row.adphone}}</span>
+                        <template slot-scope="scope">
+                            <span >{{scope.row.userId}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column prop="adpca" label="收货地址" width="240" align="center">
-                        <template #default="scope">
-                            <el-cascader
-                                v-model="scope.row.adpca"
-                                :options="pcaOptions"
-                                :props="addressProps"
-                                placeholder="请选择"
-                                @change="handleAddressNode"
-                                filterable
-                                :disabled="!addressEdit[scope.$index]"
-                            ></el-cascader>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="addetail" label="详细地址" width="180">
-                        <template #default="scope">
-                            <el-input size="medium" v-model="scope.row.addetail" v-if="addressEdit[scope.$index]"></el-input>
-                            <span v-else>{{scope.row.addetail}}</span>
-                        </template>
-                    </el-table-column>
-                    <el-table-column prop="adisdefault" label="默认地址" width="100">\
-                        <template #default="scope">
-                            <div v-if="addressEdit[scope.$index]">
-                                <el-checkbox v-model="scope.row.adisdefault" :true-label="1" :false-label="0" @change="changtest">
-                                    设为默认</el-checkbox>
-                            </div>
-                            <div v-else>
-                                <el-tag v-if="scope.row.adisdefault==1" type="success" size="mini">默认</el-tag>
-                            </div>
+                        <template slot-scope="scope">
+                            <el-input size="medium" v-model="scope.row.address" v-if="addressEdit[scope.$index]"></el-input>
+                            <span v-else>{{scope.row.address}}</span>
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" align="center" width="180">
@@ -133,7 +102,7 @@
                                 保存</el-button>
                             <el-popconfirm
                                 title="确定删除该地址？"
-                                @click.native.prevent="deleteAddress(scope.$index, addressData)">
+                                @confirm="deleteAddress(scope.row)">
                                 <template #reference>
                                     <el-button size="small" icon="el-icon-delete">删除</el-button>
                                 </template>
@@ -194,6 +163,7 @@ export default{
                     trigger: 'blur'
                 }],
             },
+            address: '',
             updatePwdDialog: false,
             formLabelWidth: '120px',
             addressData: [],
@@ -278,6 +248,16 @@ export default{
             return isJPG && isLt2M;
         },
         loadAddressData(){
+
+            this.axios.get("http://49.232.81.174:8080/users/getAddress", {
+                params: {
+                    userId: localStorage.getItem('userId'),
+                }
+            }).then(result => {
+                if (result.data['message'] == '操作成功') {
+                    this.addressData = result.data['data']
+                }
+            })
             request;
             for(let i in this.addressData){
                 this.addressEdit[i] = false
@@ -298,10 +278,30 @@ export default{
             this.addressEdit[index] = !this.addressEdit[index]
         },
         saveAddress(index, value){
+            this.axios.get("http://49.232.81.174:8080/users/addAddress", {
+                params: {
+                    userId: localStorage.getItem('userId'),
+                    address: value.address
+                }
+            }).then(result => {
+                if (result.data['message'] == '操作成功') {
+                    location.reload()
+                }
+            })
             this.addressEdit[index] = !this.addressEdit[index]
         },
-        deleteAddress(index, rows){
-            rows.splice(index,1)
+        deleteAddress(row){
+            this.axios.get("http://49.232.81.174:8080/users/deleteAddress", {
+                params: {
+                    userId: localStorage.getItem('userId'),
+                    address: row['address']
+                }
+            }).then(result => {
+                if (result.data['message'] == '操作成功') {
+                    console.log(result.data)
+                    location.reload()
+                }
+            })
         },
         changePassword() {
             

@@ -370,6 +370,8 @@ export default{
             "bank": this.ruleForm.bank,
             "password":this.ruleForm.pwd,
             "type": this.ruleForm.type_radio,
+            "email": this.ruleForm.email,
+            "city": this.ruleForm.city,
             "admin": false
             };
             _this.$http.post(url,postData,{ emulateJSON: true }).then(result => {
@@ -377,45 +379,6 @@ export default{
             })
 
         },
-
-    //   toLogin: function(){
-    //     setTimeout(this.$router.push('/login'), 3000)
-    //     var url = 'http://49.232.81.174:8080/users/register';
-    //     var postData = {
-    //       "id": this.ruleForm.id,
-    //       "name": this.ruleForm.name,
-    //       "phone": this.ruleForm.phone,
-    //       "sex": this.ruleForm.sex_radio,
-    //       "bank": this.ruleForm.bank,
-    //       "password":this.ruleForm.pwd,
-    //       "type": this.ruleForm.type_radio,
-    //       "admin": false
-    //     }
-
-    //     this.$http.post(url, JSON.stringify(postData), {emulateJSON: true}).then(result => {
-    //       console.log(result.data)
-    //     })
-    //   },
-
-        // toLogin: function(){
-        //     setTimeout(this.$router.push('/login'), 3000)
-        //     const _this = this
-        //     console.log(this.ruleForm);
-        //     var url = 'http://49.232.81.174:8080/users/register';
-        //   this.$http.post(url, {
-        //     "id": "12131414",
-        //     "name": this.ruleForm.name,
-        //     "phone": this.ruleForm.phone,
-        //     "sex": this.ruleForm.sex_radio,
-        //     "bank": this.ruleForm.bank,
-        //     "password": this.ruleForm.password,
-        //     "type": 1,
-        //     "admin": false
-        //   }, { emulateJSON: true }).then(res => {
-        //     console.log(res.body);
-        //   });
-        // },
-
         checkRadio($event){
             let _this = this
             let objVal = _this.ruleForm[$event.target.name];

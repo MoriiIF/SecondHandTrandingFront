@@ -3,7 +3,7 @@
             <el-header style="background: #3e3e3e; font-size: 14px; height: 30px">
                 <div style="width: 60%; height: 30px; margin: 0 auto; display: flex;">
                     <div style="text-align: left; display: flex; flex: 1;">
-                        <div class="active" @click="goHome">校园二手交易平台</div>
+                        <div class="active" @click="goHome">二手商品交易平台</div>
                     </div>
                     <div v-if="userId" style="width: 258px; text-align: right; display: flex;">
                         <div class="active" @click="goCenter">{{userId}}</div>
@@ -23,11 +23,7 @@ export default{
     data(){
         return {
             userId: localStorage.getItem('userId'),
-        }
-    },
-    computed: {
-        userId(){
-            return localStorage.getItem('userId');
+            userInfo: "",
         }
     },
 
@@ -39,12 +35,23 @@ export default{
             this.$router.replace('/register')
         },
         goCenter(){
-            if (this.userId == "admin") {
-                this.$router.push('/adminCenter')
-            } else {
-                this.$router.push('/personalCenter')
-            }
-            
+            var url = "http://49.232.81.174:8080/users/getUserInfo"
+            this.axios.get(url, {
+                params: {
+                    id: this.userId,
+                }
+            }).then(res => {
+                if(res.data['message'] == "操作成功"){
+                    this.userInfo = res.data['data']
+                    if (this.userInfo.admin == true) {
+                        this.$router.push('/adminCenter')
+                    } else if (this.userInfo.type == 2){
+                        this.$router.push('/merchant')
+                    } else {
+                        this.$router.push('/personalCenter')
+                    }
+                }
+            })
         },
         logOut() {
             localStorage.setItem('userId', '')

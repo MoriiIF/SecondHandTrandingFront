@@ -28,11 +28,6 @@
           <i class="el-icon-key" slot="prefix" name="password" scale="20" />
         </el-input>
       </el-form-item>
-      <el-radio-group v-model="radio">
-        <el-radio :label="1">普通用户</el-radio>
-        <el-radio :label="2">商家</el-radio>
-        <el-radio :label="3">管理员</el-radio>
-      </el-radio-group>
       <br><br>
       <el-checkbox v-model="loginForm.rememberMe" style="margin: 0 0 25px 0">
         记住我
@@ -166,7 +161,7 @@ export default{
           _this.loginForm.username = res.data.data.userId;
           _this.$router.push('/');
         }else {
-          console.log(res.data.data)
+          console.log(res.data)
         }
       })
     },

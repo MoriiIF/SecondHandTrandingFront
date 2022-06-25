@@ -31,25 +31,6 @@ export default {
         return {
         }
     },
-    // mounted(){
-    //     var url = "http://49.232.81.174:8080/commodity/listAll"
-    //     this.axios.get(url).then(result => {
-    //         if (result.data['message'] == '操作成功') {
-    //             this.p = result.data['data']
-    //         }
-    //     })
-    // },
-    // methods: {
-    //     getPro() {
-    //         var url = "http://49.232.81.174:8080/commodity/listAll"
-    //         this.axios.get(url).then(result => {
-    //             if (result.data['message'] == '操作成功') {
-    //                 this.p = result.data['data']
-    //                 this.reload()
-    //             }
-    //         })
-    //     }
-    // }
 }
 </script>
 

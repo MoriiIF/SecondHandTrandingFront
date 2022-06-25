@@ -12,7 +12,7 @@
                             <span style="font-weight: bold">二手交易平台</span>
                         </div>
                     </template>
-                    <el-menu :default-openeds="['1', '4']" default-active="this.$route.path" router>
+                    <el-menu background-color="rgba(36,123,180,0.51)" text-color="#b4dbf4" active-text-color="#7BE4FF" :default-openeds="['1', '4']" default-active="this.$route.path" router>
                         <el-submenu index="1" style="background-color: #c3d1e3">
                             <template slot="title"><i class="el-icon-message"></i>平台审核</template>
                             <!-- <router-link class="el-menu-item index='1-1'" active-class="active" to="/userInfo">个人信息</router-link> -->
@@ -25,7 +25,9 @@
                     <el-main>
                         <router-view></router-view>
                     </el-main>
-                    <!-- <el-footer>Footer</el-footer> -->
+                                <el-footer>
+                <Bottom></Bottom>
+            </el-footer>
                 </el-container>
             </el-container>
         </el-container>
@@ -34,8 +36,9 @@
 
 <script>
 import Top from "../views/page/top.vue"
+import Bottom from "../views/page/bottom.vue"
 export default{
-    components: {Top},
+    components: {Top, Bottom},
     data() {
         return{
 

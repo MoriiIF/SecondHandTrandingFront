@@ -2,8 +2,7 @@
     <div class="rechargeRecord">
         <el-row>
             <el-col span="2">
-                <h3>充值记录</h3>
-                <span style="display: inline-block">(账户余额：)</span>
+                <h3>交易记录</h3>
             </el-col>
         </el-row>
         <el-table
@@ -11,13 +10,11 @@
             :data="tableData"
             style="width: 100% text-align: center"
             >
-            <el-table-column type="index" label="序号" :index="indexMethod"></el-table-column>
-            <el-table-column prop="date" label="充值日期" sortable width="180" column-key="date" :filter-method="filterHandler">
-            </el-table-column>
-            <el-table-column prop="money" label="充值金额" width="100">
-            </el-table-column>
-            <el-table-column prop="way" label="充值方式" width="100">
-            </el-table-column>
+            <el-table-column type="index" label="序号" width="50"></el-table-column>
+            <el-table-column prop="tradeId" label="交易流水号" width="300"></el-table-column>
+            <el-table-column prop="moneyTrade" label="金钱交易" width="100"></el-table-column>
+            <el-table-column prop="pointTrade" label="积分交易" width="100"></el-table-column>
+            <el-table-column prop="time" label="交易时间" width="300"></el-table-column>
         </el-table>
     </div>
 </template>
@@ -26,25 +23,24 @@
 export default{
     data(){
         return {
-            tableData: [
-                {
-                    date: '2022-04-01',
-                    money: '￥100.00',
-                    way: '微信充值'
-                },
-                {
-                    date: '2022-04-05',
-                    money: '￥100.00',
-                    way: '支付宝充值'
-                }
-            ]
+            tableData: []
         }
     },
+    mounted() {
+        this.getTradeRecord()
+    },
     methods: {
-        filterHandler(value, row, column){
-            const property = column['property'];
-            return row[property] === value;
-        },
+        getTradeRecord() {
+            this.axios.get("http://49.232.81.174:8080/users/getTradeRecord", {
+                params: {
+                    userId: localStorage.getItem('userId')
+                }
+            }).then(result => {
+                if (result.data['message'] == '操作成功') {
+                    this.tableData = result.data['data']
+                }
+            })
+        }
     }
 }
 </script>

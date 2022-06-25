@@ -45,7 +45,6 @@
                     <el-table-column label="金额" width="170">
                         <template slot-scope="scope">
                             <span style="color: red;">￥ {{(scope.row.price * scope.row.count).toFixed(2)}}</span>
-                            <!-- <span style="color: red;">￥{{getCost(scope.$row, scope.row.count, scope.row.price)}}</span> -->
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" width="150">
@@ -91,7 +90,6 @@ export default{
                 userId: localStorage.getItem('userId')
             }}).then(res => {
                 if(res.data['message'] == '操作成功'){
-                    console.log(res.data['data']['cartProducts'])
                     this.productInCart = res.data['data']['cartProducts']
                     this.reload()
                 }
@@ -119,18 +117,6 @@ export default{
         deleteOne(index, rows){
             rows.splice(index, 1);
         },
-        // getCost(row, count, price){
-        //     row.cost = (count * price).toFixed(2);
-        //     return (count * price).toFixed(2);
-        // },
-        // selectionRow(selection, row){
-        //     let selected = selection.length && selection.indexOf(row) !== -1;
-        //     if(selected){
-        //         this.sum += parseFloat(this.getCost(row.num, row.price));
-        //     }else {
-        //         this.sum = 0.00;
-        //     }
-        // },
         handleSelectionChange(val){
             this.selectionProduct = val;
             console.log(this.selectionProduct)
@@ -142,32 +128,6 @@ export default{
                 name: 'orderConfirm',
                 params: {productPass: this.selectionProduct}
             })
-            // setTimeout(() => {
-            //     for(var i = 0; i < this.selectionProduct.length; i++){
-            //         this.deleteProduct(i, this.selectionProduct)
-            //         this.productInCart.splice(this.selectionProduct[i].index, 1);
-            //     }
-            // }, 2000)
-            // for(var i = 0; i < this.selectionProduct.length; i++){
-            //     this.$router.push({
-            //         name: 'orderConfirm',
-            //         params: {ProductPass: this.selectionProduct[i].index}
-            //     })
-            //     //this.productInCart.splice(this.selectionProduct[i].index, 1);
-            // }
-            // this.$alert('结算成功，请到订单列表查看详情！', '支付成功', {
-            //     confirmButtonText: '确定'
-            // });
-            // setTimeout(() => {
-            //     for(var i = 0; i < this.selectionProduct.length; i++){
-            //         this.$router.push({
-            //             name: 'orderConfirm',
-            //             params: {dataPass: this.selectionProduct[i].index}
-            //         })
-            //         this.productInCart.splice(this.selectionProduct[i].index, 1);
-            //     }
-            // }, 2000)
-            
         }
     }
 }

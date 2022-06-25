@@ -5,35 +5,11 @@
                     <div style="width: 80%; margin: 0 auto; margin-bottom: 30px;">
                         <div style="display: flex;">
                             <div style="flex: 1;">
-                                <div class="foot-title">帮助中心</div>
-                                <div class="foot-item">账户管理</div>
-                                <div class="foot-item">购物指南</div>
-                                <div class="foot-item">订单操作</div>
+                                <div class="foot-title">找到我</div>
+                                <div class="foot-item" onclick="window.open('http://kan1as.com/')">个人网站</div>
+                                <div class="foot-item" onclick="window.open('https://github.com/Kan1aSorata')">Github</div>
                             </div>
-                            <div style="flex: 1;">
-                                <div class="foot-title">服务支持</div>
-                                <div class="foot-item">账户管理</div>
-                                <div class="foot-item">购物指南</div>
-                                <div class="foot-item">订单操作</div>
-                            </div>
-                            <div style="flex: 1;">
-                                <div class="foot-title">线下门店</div>
-                                <div class="foot-item">账户管理</div>
-                                <div class="foot-item">购物指南</div>
-                                <div class="foot-item">订单操作</div>
-                            </div>
-                            <div style="flex: 1;">
-                                <div class="foot-title">关于平台</div>
-                                <div class="foot-item">账户管理</div>
-                                <div class="foot-item">购物指南</div>
-                                <div class="foot-item">订单操作</div>
-                            </div>
-                                <div style="flex: 1;">
-                                <div class="foot-title">关于我们</div>
-                                <div class="foot-item">账户管理</div>
-                                <div class="foot-item">购物指南</div>
-                                <div class="foot-item">订单操作</div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

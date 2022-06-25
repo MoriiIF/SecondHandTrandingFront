@@ -7,7 +7,9 @@
         <el-table :data="commodityVerifyData" border style="width: 100%">
           <el-table-column fixed prop="shop" label="卖家" width="120"></el-table-column>
           <el-table-column fixed prop="category" label="商品分类" width="120"></el-table-column>
-          <el-table-column fixed prop="picture" label="商品图片" width="200"></el-table-column>
+          <el-table-column fixed prop="picture" label="商品图片" width="100">
+            <template slot-scope="scope"><img style="height: 80px" :src="scope.row.picture"></template>
+          </el-table-column>
           <el-table-column fixed prop="name" label="商品名称" width="170"></el-table-column>
           <el-table-column fixed prop="description" label="商品描述" width="240"></el-table-column>
           <el-table-column fixed prop="price" label="价格" width="120"></el-table-column>

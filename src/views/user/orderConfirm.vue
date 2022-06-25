@@ -49,18 +49,20 @@
                     </el-table-column>
                 </el-table>
             </div>
-            <!-- <div class="total-box">
-                <div class="total-info">
-                    <span class="pay-title">实付款：</span>
-                    <span class="pay-price">￥ {{}}</span>
-                </div>
-            </div> -->
             <div class="submit-order">
                 <div class="wrapper">
                     <!-- <el-button class="go-back" type="text">返回购物车</el-button> -->
-                    <el-button class="go-submit" @click="dialogVisible = true">提 交 订 单</el-button>
+                    <el-button class="go-submit" @click="orderCheck">提 交 订 单</el-button>
                 </div>
             </div>
+
+            <el-dialog title="支付失败" :visible.sync="dialogFailureVisible" width="30%">
+                <span>{{failureMessage}}</span>
+                <span slot="footer" class="dialog-footer">
+                    <el-button type="primary" @click="failureConfirm">确 定</el-button>
+                </span>
+            </el-dialog>
+
             <el-dialog title="支付成功" :visible.sync="dialogVisible" width="30%">
                 <span>请到订单列表查看详情吧！</span>
                 <span slot="footer" class="dialog-footer">
@@ -80,6 +82,8 @@ export default {
             addressList: ['地址一', '地址二', '地址三'],
             productInOrder:[],
             dialogVisible: false,
+            dialogFailureVisible: false,
+            failureMessage: '',
         }
     },
     computed: {
@@ -92,36 +96,38 @@ export default {
             let _this = this;
             _this.productInOrder = this.$route.params.productPass;
         },
-        
+        orderCheck() {
+            var url = "http://49.232.81.174:8080/users/payment"
+            var cost = 0.0;
+            for (var i = 0; i < this.productInOrder.length; i++) {
+                console.log(this.productInOrder[i].count)
+                console.log(this.productInOrder[i].price)
+                cost = cost + this.productInOrder[i].count * this.productInOrder[i].price   
+            }
+            this.axios.get(url, {
+                params: {
+                userId: localStorage.getItem('userId'),
+                money: cost
+            }
+            }).then(result => {
+                console.log(result.data['data'])
+                if (result.data['data'] == 'success.') {
+                    this.dialogVisible = true
+                } else {
+                    this.failureMessage = result.data['data']
+                    this.dialogFailureVisible = true
+                }
+            })
+        },
+        failureConfirm() {
+            this.dialogFailureVisible = false
+            this.$router.push({
+                name: 'cart'
+            })
+        },
         submitOrder(){
             this.dialogVisible = false
-            // var axios = require('axios');
-            // var data = JSON.stringify({
-            //     "id": localStorage.getItem('userId'),
-            //     "sku": this.productInOrder[0].id,
-            //     "price": this.productInOrder[0].price,
-            //     "count": this.productInOrder[0].count,
-            //     "payment": this.productInOrder[0].cost,
-            //     "status": this.productInOrder[0].tradingStatus
-            // });
-
-            // var config = {
-            //     method: 'post',
-            //     url: 'http://49.232.81.174:8080/users/insertHistory',
-            //     headers: { 
-            //         'User-Agent': 'apifox/1.0.0 (https://www.apifox.cn)', 
-            //         'Content-Type': 'application/json'
-            //     },
-            //     data : data
-            //     };
-
-            // axios(config)
-            //   atch(function (error) {
-            //     console.log(error);
-            // });  .then(function (response) {
-            //     console.log(JSON.stringify(response.data));
-            // })
-
+            console.log(this.productInOrder)
             for(var i = 0; i < this.productInOrder.length; i++){
                 this.axios.post("http://49.232.81.174:8080/users/insertHistory", {
                     id: localStorage.getItem('userId'),
@@ -150,10 +156,6 @@ export default {
                     params: {delivery: this.productInOrder}
                 }
             )
-            
-            // this.$alert('请到订单列表查看详情吧！', '支付成功',{
-            //     confirmButtonText: '确定'
-            // });
         }
     }
 }

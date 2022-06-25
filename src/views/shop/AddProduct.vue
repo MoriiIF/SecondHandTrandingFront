@@ -10,6 +10,12 @@
                     <!-- <el-cascader v-model="ruleForm.category" :options="productCateOptions"></el-cascader> -->
                     <el-select v-model="ruleForm.category" placeholder="请选择商品分类">
                     <el-option label="数码" value="数码"></el-option>
+                    <el-option label="生活" value="生活"></el-option>
+                    <el-option label="家用电器" value="家用电器"></el-option>
+                    <el-option label="男/女装" value="男/女装"></el-option>
+                    <el-option label="食品" value="食品"></el-option>
+                    <el-option label="医药保健" value="医药保健"></el-option>
+                    <el-option label="图书" value="图书"></el-option>
                     </el-select>
                 </el-form-item> 
                 <el-form-item label="商品介绍：" prop="description">
@@ -48,6 +54,8 @@
 </template>
 
 <script>
+import { timeouts } from 'retry';
+
 export default{
     name: 'addProduct',
     data(){
@@ -137,25 +145,10 @@ export default{
                 }
             })
         },
-        // handleNext(formName){
-        //     this.$refs[formName].validate((valid) => {
-        //         if(valid){
-        //             this.$emit('nextStep');
-        //         }else {
-        //             this.$message({
-        //                 message: '验证失败',
-        //                 type: 'error',
-        //                 duration: 1000
-        //             });
-        //             return false;
-        //         }
-        //     });
-        // },
         submitProduct(ruleForm){
-            console.log(ruleForm)
             ruleForm.shop = localStorage.getItem('userId')
             this.axios.post("http://49.232.81.174:8080/commodity/add", ruleForm).then(function(response) {
-                console.log(response)
+                setTimeout(location.reload(), 5000)
             }).catch(function(error) {
                 console.log(error)
             })

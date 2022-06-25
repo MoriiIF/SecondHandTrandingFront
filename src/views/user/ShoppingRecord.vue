@@ -38,18 +38,21 @@
             <el-table-column label="交易状态" width="100">
                 <template slot-scope="scope">
                     <span v-if="scope.row.status == 1">已下单</span>
-                    <span v-else-if="scope.row.status == 2">已下单</span>
-                    <span v-else-if="scope.row.status == 3">已下单</span>
-                    <span v-else-if="scope.row.status == 4">已下单</span>
-                    <span v-else-if="scope.row.status == 5">已下单</span>
+                    <span v-else-if="scope.row.status == 2">已发货</span>
+                    <span v-else-if="scope.row.status == 3">已完成</span>
+                    <span v-else-if="scope.row.status == 4">退货中</span>
+                    <span v-else-if="scope.row.status == 5">完成退货</span>
                     <span v-else>订单出错</span>
                 </template>
             </el-table-column>
             <el-table-column label="交易操作" width="100">
                 <template slot-scope="scope">
-                    <el-button size="small" @click="goto(scope.row)" v-if="scope.row.status === 3">评价</el-button>
-                    <el-button type="danger" size="small" @click="confirmReceive(scope.row)" v-else-if="scope.row.status === 2" >确认收货</el-button>
-                    <el-button type="danger" size="small" @click="applyForReturn(scope.row)" v-else-if="scope.row.status === 3" >申请退货</el-button>
+                    
+                    <el-button type="danger" size="small" @click="confirmReceive(scope.row)" v-if="scope.row.status === 2" >确认收货</el-button>
+                    <template v-else-if="scope.row.status === 3">
+                        <el-button type="danger" size="small" @click="applyForReturn(scope.row)"  >申请退货</el-button>
+                        <el-button size="small" @click="goto(scope.row)" >评价</el-button>
+                    </template>
                 </template>
             </el-table-column>
         </el-table>
@@ -84,7 +87,7 @@ export default {
                }
             }).then(result => {
                 if (result.data['message'] == '操作成功') {
-                    console.log(result.data)
+                    location.reload()
                 }
             })
             })
@@ -97,7 +100,7 @@ export default {
                }
             }).then(result => {
                 if (result.data['message'] == '操作成功') {
-                    console.log(result.data)
+                    location.reload()
                 }
             })
             // this.$router.push('/comment');
@@ -110,6 +113,7 @@ export default {
             }).then(result => {
                 if (result.data['message'] == '操作成功') {
                     this.tableData = result.data['data']
+                    console.log(this.tableData)
                 }
             })
         },
