@@ -10,7 +10,6 @@ I'm new in Programming, so if you find any problem about this program, please fe
 - [Compiles and hot-reloads for development](#Compiles and hot-reloads for development)
 - [Compiles and minifies for production](#Compiles and minifies for production)
 - [Lints and fixes files](#Lints and fixes files)
-- [Contributors](#Contributors)
 - [License](#license) 
 
 ## Install
@@ -19,19 +18,19 @@ I'm new in Programming, so if you find any problem about this program, please fe
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## Compiles and hot-reloads for development
 
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+## Compiles and minifies for production
 
 ```
 npm run build
 ```
 
-### Lints and fixes files
+## Lints and fixes files
 
 ```
 npm run lint
